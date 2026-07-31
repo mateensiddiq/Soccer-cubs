@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Container from "@/components/Container";
 import PageHero from "@/components/PageHero";
-import PlaceholderNote from "@/components/PlaceholderNote";
 import { ButtonLink } from "@/components/Button";
 
 export const metadata: Metadata = {
@@ -18,43 +17,48 @@ export default function AboutPage() {
 
       <section className="py-16">
         <Container className="max-w-3xl">
-          <PlaceholderNote>
-            swap this bio and photo for your own — this is just a
-            realistic placeholder so the page isn&apos;t empty.
-          </PlaceholderNote>
-
           <div className="grid sm:grid-cols-[200px_1fr] gap-8 items-start">
-            <div className="mx-auto sm:mx-0 h-48 w-48 rounded-full bg-yellow-soft border-4 border-white shadow-md flex items-center justify-center overflow-hidden">
-              <Image
-                src="/images/brand/cub.png"
-                alt="Coach headshot placeholder"
-                width={160}
-                height={160}
-                className="h-32 w-32 object-contain"
-              />
+            <div>
+              <div className="mx-auto sm:mx-0 h-48 w-48 rounded-full bg-yellow-soft border-4 border-white shadow-md flex items-center justify-center overflow-hidden">
+                <Image
+                  src="/images/brand/cub.png"
+                  alt="Soccer Cubs mascot"
+                  width={160}
+                  height={160}
+                  className="h-32 w-32 object-contain"
+                />
+              </div>
+              <p className="mt-2 text-center sm:text-left text-xs text-brown-soft/70">
+                Real photo coming soon!
+              </p>
             </div>
             <div>
               <h2 className="font-heading font-extrabold text-2xl text-brown">
-                Hi, I&apos;m Coach [Your Name] 👋
+                Hi, I&apos;m Coach Mateen 👋
               </h2>
               <p className="mt-4 text-brown-soft">
-                I started Soccer Cubs because I wanted young kids to fall in
-                love with movement before it ever felt like a &ldquo;sport&rdquo;
-                &mdash; just running, kicking, laughing, and being part of a
-                team of their peers. After coaching youth soccer for several
-                years, I kept noticing the same thing: the earlier kids get
-                comfortable being active in a group, the more confident they
-                become everywhere else too.
+                I&apos;m Mateen Siddiq, a former semi-professional soccer
+                player, and for the last 7 years I&apos;ve been coaching kids
+                as young as 2 years old. Most of that experience comes from
+                working directly inside daycares &mdash; which is exactly
+                where the idea for Soccer Cubs was born, years before it ever
+                had a name.
               </p>
               <p className="mt-4 text-brown-soft">
-                Soccer Cubs is my way of bringing that experience directly to
-                daycares, so parents don&apos;t have to add one more
-                after-work activity to the schedule &mdash; their cub gets to
-                play soccer right where they already spend their day.
+                I&apos;m actively pursuing my USSF coaching licenses and I&apos;m
+                SafeSport certified, because the families who trust me with
+                their cubs deserve a coach who takes that seriously.
               </p>
               <p className="mt-4 text-brown-soft">
-                Every class is designed around one goal: making sure every
-                single kid, no matter their skill level, leaves smiling.
+                What I love most is introducing this next generation of
+                athletes to soccer in a way that sticks &mdash; building real
+                motor skills and teamwork, while making sure every cub grows
+                up with a genuinely great relationship with the game.
+              </p>
+              <p className="mt-4 text-brown-soft">
+                Soccer Cubs is the result of years of doing this work before
+                it ever became a business &mdash; built from real experience
+                on the field, not a business plan.
               </p>
             </div>
           </div>
