@@ -3,6 +3,7 @@ export type Location = {
   name: string;
   address: string | null;
   contact_name: string | null;
+  class_day: string | null;
   active: boolean;
   display_order: number;
   monthly_price_cents: number;

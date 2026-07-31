@@ -12,6 +12,7 @@ create table if not exists locations (
   name text not null,
   address text,
   contact_name text,
+  class_day text,
   active boolean not null default true,
   display_order integer not null default 0,
   monthly_price_cents integer not null,

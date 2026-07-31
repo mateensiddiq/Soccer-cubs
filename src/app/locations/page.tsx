@@ -52,6 +52,11 @@ export default async function LocationsPage() {
                   {location.address && (
                     <p className="mt-1 text-sm text-brown-soft">{location.address}</p>
                   )}
+                  {location.class_day && (
+                    <p className="mt-1 text-sm font-semibold text-orange">
+                      Classes: {location.class_day}
+                    </p>
+                  )}
                   <div className="mt-4 pt-4 border-t border-brown/10">
                     <ButtonLink
                       href={`/signup?location=${location.id}`}
