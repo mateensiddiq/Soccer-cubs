@@ -50,6 +50,8 @@ export async function POST(request: Request) {
         const locationName =
           (enrollment as unknown as { locations?: { name?: string } }).locations?.name ??
           "your daycare";
+        const origin = request.headers.get("origin") ?? new URL(request.url).origin;
+        const billingUrl = `${origin}/billing`;
 
         // The enrollment is already saved as active above — a failed email
         // here shouldn't turn into a Stripe webhook retry loop, so we log
@@ -61,7 +63,7 @@ export async function POST(request: Request) {
             `
               <p>Hi ${enrollment.parent_name},</p>
               <p>${enrollment.child_name} is officially enrolled in Soccer Cubs at ${locationName}! We can't wait to see them on the field.</p>
-              <p>You can manage your subscription anytime from the "Manage My Subscription" link on our website.</p>
+              <p>You can manage your subscription anytime from the <a href="${billingUrl}">Manage My Subscription</a> page.</p>
               <p>See you soon!<br/>Soccer Cubs</p>
             `
           );
