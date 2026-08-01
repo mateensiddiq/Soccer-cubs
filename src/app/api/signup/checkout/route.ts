@@ -15,6 +15,8 @@ export async function POST(request: Request) {
 
   const {
     locationId,
+    sessionId,
+    fullYear,
     childName,
     childDob,
     notes,
@@ -27,7 +29,9 @@ export async function POST(request: Request) {
 
   const { data: location, error: locationError } = await db
     .from("locations")
-    .select("id, name, active, stripe_price_id")
+    .select(
+      "id, name, active, pricing_mode, stripe_price_id, full_year_price_cents, full_year_stripe_price_id"
+    )
     .eq("id", locationId)
     .single();
 
@@ -35,11 +39,44 @@ export async function POST(request: Request) {
     return Response.json({ error: "Location not found." }, { status: 404 });
   }
 
-  if (!location.stripe_price_id) {
+  // Figure out which Stripe price to charge and whether this is a
+  // recurring subscription (monthly locations) or a one-time payment
+  // (session-based locations).
+  let stripePriceId: string | null;
+  let mode: "subscription" | "payment";
+  let sessionIdForEnrollment: string | null = null;
+  let isFullYear = false;
+
+  if (location.pricing_mode === "monthly") {
+    stripePriceId = location.stripe_price_id;
+    mode = "subscription";
+  } else if (fullYear) {
+    stripePriceId = location.full_year_stripe_price_id;
+    mode = "payment";
+    isFullYear = true;
+  } else if (sessionId) {
+    const { data: session, error: sessionError } = await db
+      .from("sessions")
+      .select("id, stripe_price_id, active, location_id")
+      .eq("id", sessionId)
+      .single();
+
+    if (sessionError || !session || !session.active || session.location_id !== locationId) {
+      return Response.json({ error: "Session not found." }, { status: 404 });
+    }
+
+    stripePriceId = session.stripe_price_id;
+    mode = "payment";
+    sessionIdForEnrollment = session.id;
+  } else {
+    return Response.json({ error: "Please choose a session." }, { status: 400 });
+  }
+
+  if (!stripePriceId) {
     return Response.json(
       {
         error:
-          "This location isn't set up for online payment yet. Please contact us and we'll help you enroll.",
+          "This isn't set up for online payment yet. Please contact us and we'll help you enroll.",
       },
       { status: 400 }
     );
@@ -49,6 +86,8 @@ export async function POST(request: Request) {
     .from("enrollments")
     .insert({
       location_id: locationId,
+      session_id: sessionIdForEnrollment,
+      is_full_year: isFullYear,
       child_name: childName,
       child_dob: childDob,
       notes: notes || null,
@@ -72,13 +111,14 @@ export async function POST(request: Request) {
   const stripe = getStripe();
 
   const session = await stripe.checkout.sessions.create({
-    mode: "subscription",
-    line_items: [{ price: location.stripe_price_id, quantity: 1 }],
+    mode,
+    line_items: [{ price: stripePriceId, quantity: 1 }],
     customer_email: parentEmail,
+    ...(mode === "payment" ? { customer_creation: "always" as const } : {}),
     client_reference_id: enrollment.id,
-    subscription_data: {
-      metadata: { enrollment_id: enrollment.id },
-    },
+    ...(mode === "subscription"
+      ? { subscription_data: { metadata: { enrollment_id: enrollment.id } } }
+      : {}),
     metadata: { enrollment_id: enrollment.id },
     success_url: `${origin}/signup/success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${origin}/signup`,

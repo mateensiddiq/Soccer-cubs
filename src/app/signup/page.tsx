@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Container from "@/components/Container";
 import PageHero from "@/components/PageHero";
 import SignupWizard from "@/components/SignupWizard";
-import { getPublicLocations } from "@/lib/locations";
+import { getPublicLocations, getPublicSessions, type PublicSession } from "@/lib/locations";
 
 export const metadata: Metadata = {
   title: "Sign Up | Soccer Cubs",
@@ -19,16 +19,29 @@ export default async function SignupPage({
     getPublicLocations(),
   ]);
 
+  const sessionsByLocation: Record<string, PublicSession[]> = {};
+  await Promise.all(
+    locations
+      .filter((loc) => loc.pricing_mode === "sessions")
+      .map(async (loc) => {
+        sessionsByLocation[loc.id] = await getPublicSessions(loc.id);
+      })
+  );
+
   return (
     <div>
       <PageHero
         eyebrow="SIGN UP"
         title="Let's get your cub on the team"
-        subtitle="Pick your daycare, tell us a bit about your child, and see your monthly rate before you pay."
+        subtitle="Pick your daycare, tell us a bit about your child, and see your price before you pay."
       />
       <section className="py-14">
         <Container className="max-w-xl">
-          <SignupWizard locations={locations} initialLocationId={location} />
+          <SignupWizard
+            locations={locations}
+            sessionsByLocation={sessionsByLocation}
+            initialLocationId={location}
+          />
         </Container>
       </section>
     </div>

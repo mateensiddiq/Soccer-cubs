@@ -1,3 +1,5 @@
+export type PricingMode = "monthly" | "sessions";
+
 export type Location = {
   id: string;
   name: string;
@@ -6,14 +8,33 @@ export type Location = {
   class_day: string | null;
   active: boolean;
   display_order: number;
-  monthly_price_cents: number;
+  pricing_mode: PricingMode;
+  monthly_price_cents: number | null;
   stripe_price_id: string | null;
+  full_year_price_cents: number | null;
+  full_year_stripe_price_id: string | null;
+  created_at: string;
+};
+
+export type Session = {
+  id: string;
+  location_id: string;
+  name: string;
+  start_date: string;
+  end_date: string;
+  class_count: number;
+  price_cents: number;
+  stripe_price_id: string | null;
+  display_order: number;
+  active: boolean;
   created_at: string;
 };
 
 export type Enrollment = {
   id: string;
   location_id: string;
+  session_id: string | null;
+  is_full_year: boolean;
   child_name: string;
   child_dob: string;
   notes: string | null;

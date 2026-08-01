@@ -39,19 +39,33 @@ export async function POST(request: Request) {
         .from("enrollments")
         .update({
           stripe_customer_id: session.customer as string,
-          stripe_subscription_id: session.subscription as string,
+          stripe_subscription_id: (session.subscription as string) ?? null,
           status: "active",
         })
         .eq("id", enrollmentId)
-        .select("child_name, parent_name, parent_email, location_id, locations(name)")
+        .select(
+          "child_name, parent_name, parent_email, location_id, is_full_year, locations(name), sessions(name)"
+        )
         .single();
 
       if (enrollment) {
-        const locationName =
-          (enrollment as unknown as { locations?: { name?: string } }).locations?.name ??
-          "your daycare";
+        const enrollmentWithRelations = enrollment as unknown as {
+          locations?: { name?: string };
+          sessions?: { name?: string };
+        };
+        const locationName = enrollmentWithRelations.locations?.name ?? "your daycare";
         const origin = request.headers.get("origin") ?? new URL(request.url).origin;
         const billingUrl = `${origin}/billing`;
+
+        // Recurring monthly enrollments have a real subscription to manage;
+        // one-time session/full-year payments don't, so don't point them at
+        // a "manage subscription" page with nothing to show them.
+        const isRecurring = Boolean(session.subscription);
+        const enrollmentDetail = enrollment.is_full_year
+          ? " for the full year"
+          : enrollmentWithRelations.sessions?.name
+            ? ` for ${enrollmentWithRelations.sessions.name}`
+            : "";
 
         // The enrollment is already saved as active above — a failed email
         // here shouldn't turn into a Stripe webhook retry loop, so we log
@@ -62,8 +76,12 @@ export async function POST(request: Request) {
             "You're signed up for Soccer Cubs! ⚽",
             `
               <p>Hi ${enrollment.parent_name},</p>
-              <p>${enrollment.child_name} is officially enrolled in Soccer Cubs at ${locationName}! We can't wait to see them on the field.</p>
-              <p>You can manage your subscription anytime from the <a href="${billingUrl}">Manage My Subscription</a> page.</p>
+              <p>${enrollment.child_name} is officially enrolled in Soccer Cubs at ${locationName}${enrollmentDetail}! We can't wait to see them on the field.</p>
+              ${
+                isRecurring
+                  ? `<p>You can manage your subscription anytime from the <a href="${billingUrl}">Manage My Subscription</a> page.</p>`
+                  : ""
+              }
               <p>See you soon!<br/>Soccer Cubs</p>
             `
           );

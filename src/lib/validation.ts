@@ -17,6 +17,8 @@ export const birthdaySchema = z.object({
 
 export const signupChildInfoSchema = z.object({
   locationId: z.string().uuid("Please choose a location."),
+  sessionId: z.string().uuid().optional(),
+  fullYear: z.boolean().optional(),
   childName: z.string().trim().min(1, "Please enter your child's name."),
   childDob: z.string().trim().min(1, "Please enter your child's date of birth."),
   notes: z.string().trim().optional(),

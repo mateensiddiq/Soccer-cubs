@@ -1,11 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { PublicLocation } from "@/lib/locations";
+import type { PublicLocation, PublicSession } from "@/lib/locations";
 import { TextField, TextareaField, SelectField } from "./FormField";
 import { Button } from "./Button";
 
-type Step = "location" | "info" | "review";
+type Step = "location" | "session" | "info" | "review";
 
 type ChildInfo = {
   childName: string;
@@ -37,11 +37,22 @@ function formatPrice(cents: number) {
   return `$${(cents / 100).toFixed(2)}`;
 }
 
+function formatDate(dateStr: string) {
+  return new Date(`${dateStr}T00:00:00`).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+  });
+}
+
+type SessionSelection = { sessionId: string } | { fullYear: true } | null;
+
 export default function SignupWizard({
   locations,
+  sessionsByLocation,
   initialLocationId,
 }: {
   locations: PublicLocation[];
+  sessionsByLocation: Record<string, PublicSession[]>;
   initialLocationId?: string;
 }) {
   const [step, setStep] = useState<Step>("location");
@@ -50,10 +61,9 @@ export default function SignupWizard({
       ? initialLocationId
       : locations[0]?.id ?? ""
   );
+  const [sessionSelection, setSessionSelection] = useState<SessionSelection>(null);
   const [info, setInfo] = useState<ChildInfo>(EMPTY_INFO);
-  const [quote, setQuote] = useState<{ locationName: string; monthlyPriceCents: number } | null>(
-    null
-  );
+  const [quote, setQuote] = useState<{ label: string; priceCents: number } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -61,18 +71,31 @@ export default function SignupWizard({
     () => locations.find((l) => l.id === locationId),
     [locations, locationId]
   );
+  const isSessionBased = selectedLocation?.pricing_mode === "sessions";
+  const sessionsForLocation = sessionsByLocation[locationId] ?? [];
 
   const age = ageInYears(info.childDob);
   const ageWarning = age !== null && (age < 1.5 || age > 7);
+
+  function goToNextAfterLocation() {
+    setSessionSelection(null);
+    setStep(isSessionBased ? "session" : "info");
+  }
 
   async function goToReview() {
     setError(null);
     setLoading(true);
     try {
+      const body: Record<string, unknown> = { locationId };
+      if (isSessionBased && sessionSelection) {
+        if ("fullYear" in sessionSelection) body.fullYear = true;
+        else body.sessionId = sessionSelection.sessionId;
+      }
+
       const res = await fetch("/api/signup/quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ locationId }),
+        body: JSON.stringify(body),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? "Could not load pricing.");
@@ -89,10 +112,16 @@ export default function SignupWizard({
     setError(null);
     setLoading(true);
     try {
+      const body: Record<string, unknown> = { locationId, ...info };
+      if (isSessionBased && sessionSelection) {
+        if ("fullYear" in sessionSelection) body.fullYear = true;
+        else body.sessionId = sessionSelection.sessionId;
+      }
+
       const res = await fetch("/api/signup/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ locationId, ...info }),
+        body: JSON.stringify(body),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? "Could not start checkout.");
@@ -119,7 +148,7 @@ export default function SignupWizard({
 
   return (
     <div className="bg-white rounded-[2rem] border-2 border-brown/10 shadow-sm p-6 sm:p-10">
-      <StepIndicator step={step} />
+      <StepIndicator step={step} includeSession={isSessionBased} />
 
       {step === "location" && (
         <div className="mt-6 space-y-6">
@@ -142,10 +171,74 @@ export default function SignupWizard({
             variant="primary"
             className="w-full sm:w-auto"
             disabled={!locationId}
-            onClick={() => setStep("info")}
+            onClick={goToNextAfterLocation}
           >
             Continue
           </Button>
+        </div>
+      )}
+
+      {step === "session" && (
+        <div className="mt-6 space-y-4">
+          <p className="text-sm text-brown-soft">
+            {selectedLocation?.name} runs in sessions. Pick one session, or
+            pay once for the full year.
+          </p>
+          <div className="space-y-3">
+            {sessionsForLocation.map((s) => {
+              const selected =
+                sessionSelection && "sessionId" in sessionSelection
+                  ? sessionSelection.sessionId === s.id
+                  : false;
+              return (
+                <button
+                  key={s.id}
+                  type="button"
+                  onClick={() => setSessionSelection({ sessionId: s.id })}
+                  className={`w-full text-left rounded-2xl border-2 px-4 py-3 transition-colors ${
+                    selected
+                      ? "border-orange bg-yellow-soft"
+                      : "border-brown/10 hover:border-orange/40"
+                  }`}
+                >
+                  <p className="font-heading font-bold text-brown">{s.name}</p>
+                  <p className="text-sm text-brown-soft">
+                    {formatDate(s.start_date)} – {formatDate(s.end_date)} &middot;{" "}
+                    {s.class_count} classes
+                  </p>
+                </button>
+              );
+            })}
+            {selectedLocation?.has_full_year_option && (
+              <button
+                type="button"
+                onClick={() => setSessionSelection({ fullYear: true })}
+                className={`w-full text-left rounded-2xl border-2 px-4 py-3 transition-colors ${
+                  sessionSelection && "fullYear" in sessionSelection
+                    ? "border-orange bg-yellow-soft"
+                    : "border-brown/10 hover:border-orange/40"
+                }`}
+              >
+                <p className="font-heading font-bold text-brown">Full Year</p>
+                <p className="text-sm text-brown-soft">
+                  Pay once now to cover all {sessionsForLocation.length} sessions.
+                </p>
+              </button>
+            )}
+          </div>
+
+          <div className="flex gap-3 pt-2">
+            <Button variant="ghost" onClick={() => setStep("location")}>
+              Back
+            </Button>
+            <Button
+              variant="primary"
+              disabled={!sessionSelection}
+              onClick={() => setStep("info")}
+            >
+              Continue
+            </Button>
+          </div>
         </div>
       )}
 
@@ -210,7 +303,10 @@ export default function SignupWizard({
           {error && <p className="text-sm font-semibold text-orange-dark">{error}</p>}
 
           <div className="flex gap-3 pt-2">
-            <Button variant="ghost" onClick={() => setStep("location")}>
+            <Button
+              variant="ghost"
+              onClick={() => setStep(isSessionBased ? "session" : "location")}
+            >
               Back
             </Button>
             <Button
@@ -234,15 +330,17 @@ export default function SignupWizard({
       {step === "review" && quote && (
         <div className="mt-6 space-y-6">
           <div className="bg-yellow-soft rounded-3xl p-6 text-center">
-            <p className="text-sm font-semibold text-brown-soft">
-              Monthly rate for {quote.locationName}
-            </p>
+            <p className="text-sm font-semibold text-brown-soft">{quote.label}</p>
             <p className="mt-1 font-heading font-extrabold text-4xl text-brown">
-              {formatPrice(quote.monthlyPriceCents)}
-              <span className="text-lg font-semibold text-brown-soft">/mo</span>
+              {formatPrice(quote.priceCents)}
+              {!isSessionBased && (
+                <span className="text-lg font-semibold text-brown-soft">/mo</span>
+              )}
             </p>
             <p className="mt-1 text-xs text-brown-soft">
-              Billed monthly, cancel anytime from &ldquo;Manage My Subscription.&rdquo;
+              {isSessionBased
+                ? "One-time payment."
+                : 'Billed monthly, cancel anytime from "Manage My Subscription."'}
             </p>
           </div>
 
@@ -276,9 +374,10 @@ export default function SignupWizard({
   );
 }
 
-function StepIndicator({ step }: { step: Step }) {
+function StepIndicator({ step, includeSession }: { step: Step; includeSession: boolean }) {
   const steps: { key: Step; label: string }[] = [
     { key: "location", label: "Location" },
+    ...(includeSession ? [{ key: "session" as const, label: "Session" }] : []),
     { key: "info", label: "Your Cub" },
     { key: "review", label: "Pay" },
   ];
