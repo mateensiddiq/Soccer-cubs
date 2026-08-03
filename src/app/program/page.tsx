@@ -16,16 +16,16 @@ const CLASS_FLOW = [
     body: "We start with a silly stretch or song to get wiggly bodies moving and excited.",
   },
   {
-    title: "Skill of the day",
-    body: "A simple, focused skill — like dribbling around cones or gentle passing — taught through games, not drills.",
+    title: "Learning the skill",
+    body: "Coach Mateen breaks down one skill at a time — dribbling through cones, passing with a partner, or a fun new trick — in simple steps every cub can follow.",
   },
   {
     title: "Mini-game",
-    body: "Everything comes together in a fun, low-pressure game where every cub touches the ball.",
+    body: "We turn the skill we just learned into a low-pressure game, so every cub gets to use what they practiced while having fun with friends.",
   },
   {
-    title: "Cool down & high fives",
-    body: "We wrap up with a group cheer and celebrate every cub's effort, not just the goals.",
+    title: "High fives & goodbyes",
+    body: "We end with a group cheer and high fives all around, sending every cub off happy and excited for next week's class.",
   },
 ];
 
@@ -48,18 +48,31 @@ export default function ProgramPage() {
       />
 
       <section className="py-16">
-        <Container className="max-w-3xl text-center">
-          <SoccerBall className="h-12 w-12 mx-auto" />
-          <h2 className="mt-3 font-heading font-extrabold text-3xl text-brown">
-            All ages, one class
-          </h2>
-          <p className="mt-3 text-brown-soft">
-            Soccer Cubs classes aren&apos;t split into separate age groups.
-            Every class blends whichever cubs are there that day &mdash; from
-            brand-new 2-year-olds up to older kids &mdash; and Coach Mateen
-            dynamically adjusts each activity on the spot, so every cub is
-            challenged at the right level, together.
-          </p>
+        <Container className="grid sm:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="bg-white rounded-3xl p-6 border-2 border-brown/10 shadow-sm">
+            <SoccerBall className="h-10 w-10" />
+            <h2 className="mt-3 font-heading font-bold text-xl text-brown">
+              How we group cubs
+            </h2>
+            <p className="mt-2 text-sm text-brown-soft">
+              Classes are generally grouped by age &mdash; 2 and 3-year-olds
+              together, 4 and 5-year-olds together &mdash; so activities
+              match where each cub is developmentally. If skill levels are
+              close, we&apos;re happy to mix ages too.
+            </p>
+          </div>
+          <div className="bg-white rounded-3xl p-6 border-2 border-brown/10 shadow-sm">
+            <PawPrint className="h-10 w-10 text-orange" />
+            <h2 className="mt-3 font-heading font-bold text-xl text-brown">
+              One coach, all year
+            </h2>
+            <p className="mt-2 text-sm text-brown-soft">
+              Coach Mateen leads every single class himself &mdash; there&apos;s
+              no rotating roster of instructors. Cubs get to grow comfortable
+              with the same familiar face all year, instead of meeting
+              someone new every few months.
+            </p>
+          </div>
         </Container>
       </section>
 
