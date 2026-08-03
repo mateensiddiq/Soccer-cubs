@@ -137,6 +137,30 @@ export default function Home() {
         </Container>
       </section>
 
+      {/* Real class photo */}
+      <section className="py-16">
+        <Container>
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <h2 className="font-heading font-extrabold text-3xl text-brown">
+              See Soccer Cubs in action
+            </h2>
+            <p className="mt-3 text-brown-soft">
+              Real cubs, real classes &mdash; dribbling, giggling, and
+              learning to love the game.
+            </p>
+          </div>
+          <div className="rounded-[2rem] overflow-hidden border-2 border-brown/10 shadow-sm">
+            <Image
+              src="/images/photos/class-action-1.jpg"
+              alt="Kids dribbling soccer balls during a Soccer Cubs class"
+              width={2000}
+              height={1125}
+              className="w-full h-auto"
+            />
+          </div>
+        </Container>
+      </section>
+
       {/* How it works */}
       <section className="py-16 bg-cream-dark">
         <Container>

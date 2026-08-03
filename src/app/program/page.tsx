@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Container from "@/components/Container";
 import PageHero from "@/components/PageHero";
 import { ButtonLink } from "@/components/Button";
@@ -113,6 +114,15 @@ export default function ProgramPage() {
                 <p className="mt-1 text-sm text-brown-soft">{item.body}</p>
               </div>
             ))}
+          </div>
+          <div className="mt-10 rounded-[2rem] overflow-hidden border-2 border-brown/10 shadow-sm">
+            <Image
+              src="/images/photos/class-action-2.jpg"
+              alt="Cubs practicing dribbling with soft training balls during class"
+              width={1600}
+              height={1323}
+              className="w-full h-auto"
+            />
           </div>
         </Container>
       </section>
