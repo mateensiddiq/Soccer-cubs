@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Container from "@/components/Container";
 import PageHero from "@/components/PageHero";
 import { ButtonLink } from "@/components/Button";
@@ -8,26 +7,8 @@ import { PawPrint, SoccerBall, SunBurst } from "@/components/illustrations";
 export const metadata: Metadata = {
   title: "Our Program | Soccer Cubs",
   description:
-    "What a Soccer Cubs class looks like: age groups, a typical class flow, and the skills we build with kids ages 2 and up.",
+    "What a Soccer Cubs class looks like: a typical class flow and the skills we build with kids ages 2 and up.",
 };
-
-const AGE_GROUPS = [
-  {
-    name: "Wobbly Cubs",
-    ages: "~2–3 years",
-    body: "Big movements, lots of songs, and getting comfortable being near a ball. Parent helpers and daycare staff nearby make this a gentle, playful intro.",
-  },
-  {
-    name: "Little Cubs",
-    ages: "~3–4 years",
-    body: "Short games that build balance and coordination, first dribbling and kicking attempts, and learning to follow simple group instructions.",
-  },
-  {
-    name: "Big Cubs",
-    ages: "5+ years",
-    body: "More structured mini-games, passing with a partner, taking turns, and growing teamwork and friendly competition as your cub gets older.",
-  },
-];
 
 const CLASS_FLOW = [
   {
@@ -67,29 +48,18 @@ export default function ProgramPage() {
       />
 
       <section className="py-16">
-        <Container>
-          <h2 className="font-heading font-extrabold text-3xl text-brown text-center">
-            Age groups
+        <Container className="max-w-3xl text-center">
+          <SoccerBall className="h-12 w-12 mx-auto" />
+          <h2 className="mt-3 font-heading font-extrabold text-3xl text-brown">
+            All ages, one class
           </h2>
-          <p className="mt-2 text-brown-soft text-center max-w-xl mx-auto">
-            Classes are grouped by age so every cub is playing at the right
-            level. Right on the 2/3 border? We&apos;re happy to find the best fit.
+          <p className="mt-3 text-brown-soft">
+            Soccer Cubs classes aren&apos;t split into separate age groups.
+            Every class blends whichever cubs are there that day &mdash; from
+            brand-new 2-year-olds up to older kids &mdash; and Coach Mateen
+            dynamically adjusts each activity on the spot, so every cub is
+            challenged at the right level, together.
           </p>
-          <div className="mt-10 grid sm:grid-cols-3 gap-6">
-            {AGE_GROUPS.map((group) => (
-              <div
-                key={group.name}
-                className="bg-white rounded-3xl p-6 border-2 border-brown/10 shadow-sm"
-              >
-                <SoccerBall className="h-10 w-10" />
-                <h3 className="mt-3 font-heading font-bold text-lg text-brown">
-                  {group.name}
-                </h3>
-                <p className="text-orange font-bold text-sm">{group.ages}</p>
-                <p className="mt-2 text-sm text-brown-soft">{group.body}</p>
-              </div>
-            ))}
-          </div>
         </Container>
       </section>
 
@@ -114,15 +84,6 @@ export default function ProgramPage() {
                 <p className="mt-1 text-sm text-brown-soft">{item.body}</p>
               </div>
             ))}
-          </div>
-          <div className="mt-10 rounded-[2rem] overflow-hidden border-2 border-brown/10 shadow-sm">
-            <Image
-              src="/images/photos/class-action-2.jpg"
-              alt="Cubs practicing dribbling with soft training balls during class"
-              width={1600}
-              height={1323}
-              className="w-full h-auto"
-            />
           </div>
         </Container>
       </section>
