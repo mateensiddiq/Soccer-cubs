@@ -38,16 +38,15 @@ export default function AboutPage() {
               </h2>
               <p className="mt-4 text-brown-soft">
                 I&apos;m Mateen Siddiq, a former semi-professional soccer
-                player, and for the last 7 years I&apos;ve been coaching kids
-                as young as 2 years old. Most of that experience comes from
-                working directly inside daycares &mdash; which is exactly
-                where the idea for Soccer Cubs was born, years before it ever
-                had a name.
+                player. I&apos;ve been coaching at Sugarland Learning Academy
+                since 2019, working with kids as young as 2 (and as old as
+                14) &mdash; and that&apos;s exactly where the idea for Soccer
+                Cubs was born, years before it ever had a name.
               </p>
               <p className="mt-4 text-brown-soft">
-                I&apos;m actively pursuing my USSF coaching licenses and I&apos;m
-                SafeSport certified, because the families who trust me with
-                their cubs deserve a coach who takes that seriously.
+                I&apos;m USSF D-licensed and SafeSport certified, because the
+                families who trust me with their cubs deserve a coach who
+                takes that seriously.
               </p>
               <p className="mt-4 text-brown-soft">
                 What I love most is introducing this next generation of

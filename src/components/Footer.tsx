@@ -29,7 +29,7 @@ export default function Footer() {
             </span>
           </div>
           <p className="mt-3 text-sm text-brown-soft max-w-xs">
-            Playful, coach-led soccer classes for 2&ndash;6 year olds, brought
+            Playful, coach-led soccer classes for ages 2 and up, brought
             right to daycares across Northern Virginia.
           </p>
         </div>

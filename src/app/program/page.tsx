@@ -7,7 +7,7 @@ import { PawPrint, SoccerBall, SunBurst } from "@/components/illustrations";
 export const metadata: Metadata = {
   title: "Our Program | Soccer Cubs",
   description:
-    "What a Soccer Cubs class looks like: age groups, a typical class flow, and the skills we build with 2-6 year olds.",
+    "What a Soccer Cubs class looks like: age groups, a typical class flow, and the skills we build with kids ages 2 and up.",
 };
 
 const AGE_GROUPS = [
@@ -23,8 +23,8 @@ const AGE_GROUPS = [
   },
   {
     name: "Big Cubs",
-    ages: "~5–6 years",
-    body: "More structured mini-games, passing with a partner, taking turns, and the beginnings of teamwork and friendly competition.",
+    ages: "5+ years",
+    body: "More structured mini-games, passing with a partner, taking turns, and growing teamwork and friendly competition as your cub gets older.",
   },
 ];
 

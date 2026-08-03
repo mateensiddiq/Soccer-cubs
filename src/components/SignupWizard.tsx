@@ -75,7 +75,7 @@ export default function SignupWizard({
   const sessionsForLocation = sessionsByLocation[locationId] ?? [];
 
   const age = ageInYears(info.childDob);
-  const ageWarning = age !== null && (age < 1.5 || age > 7);
+  const ageWarning = age !== null && age < 1.5;
 
   function goToNextAfterLocation() {
     setSessionSelection(null);
@@ -261,8 +261,8 @@ export default function SignupWizard({
           />
           {ageWarning && (
             <p className="text-sm font-semibold text-orange-dark bg-yellow-soft rounded-xl px-3 py-2">
-              Just a heads up — Soccer Cubs is designed for ages 2–6. Reach
-              out on our{" "}
+              Just a heads up — Soccer Cubs is designed for ages 2 and up.
+              Reach out on our{" "}
               <a href="/contact" className="underline">
                 contact page
               </a>{" "}

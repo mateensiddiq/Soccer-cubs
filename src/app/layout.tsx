@@ -19,7 +19,7 @@ const nunito = Nunito({
 export const metadata: Metadata = {
   title: "Soccer Cubs | On-Site Soccer Classes for Little Ones in Northern VA",
   description:
-    "Soccer Cubs brings playful, coach-led soccer classes right to daycares across Northern Virginia for kids ages 2-6. Sign up online or bring us to your daycare.",
+    "Soccer Cubs brings playful, coach-led soccer classes right to daycares across Northern Virginia for kids ages 2 and up. Sign up online or bring us to your daycare.",
 };
 
 export default function RootLayout({

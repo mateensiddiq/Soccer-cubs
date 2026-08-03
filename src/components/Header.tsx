@@ -8,6 +8,7 @@ import Container from "./Container";
 import { ButtonLink } from "./Button";
 
 const NAV_LINKS = [
+  { href: "/", label: "Home" },
   { href: "/program", label: "Program" },
   { href: "/about", label: "About the Coach" },
   { href: "/locations", label: "Locations" },
