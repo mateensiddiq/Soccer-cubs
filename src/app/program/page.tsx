@@ -76,7 +76,7 @@ export default function ProgramPage() {
         </Container>
       </section>
 
-      <section className="py-16 bg-cream-dark">
+      <section className="py-16 border-t border-brown/10">
         <Container>
           <h2 className="font-heading font-extrabold text-3xl text-brown text-center">
             A typical class
@@ -88,7 +88,7 @@ export default function ProgramPage() {
           <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {CLASS_FLOW.map((item, i) => (
               <div key={item.title} className="text-center px-2">
-                <div className="mx-auto h-12 w-12 rounded-full bg-yellow text-brown font-heading font-extrabold text-xl flex items-center justify-center border-2 border-brown/10">
+                <div className="mx-auto h-12 w-12 rounded-full bg-yellow text-brown font-heading font-extrabold text-xl flex items-center justify-center border-2 border-brown/10 shadow-sm">
                   {i + 1}
                 </div>
                 <h3 className="mt-3 font-heading font-bold text-brown">
@@ -101,7 +101,7 @@ export default function ProgramPage() {
         </Container>
       </section>
 
-      <section className="py-16">
+      <section className="py-16 border-t border-brown/10">
         <Container className="grid lg:grid-cols-2 gap-10 items-center">
           <div>
             <SunBurst className="h-14 w-14" />

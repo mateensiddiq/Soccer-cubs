@@ -108,7 +108,7 @@ export default function Home() {
       </section>
 
       {/* Real class photo */}
-      <section className="py-16">
+      <section className="py-16 border-t border-brown/10">
         <Container>
           <div className="text-center max-w-2xl mx-auto mb-10">
             <h2 className="font-heading font-extrabold text-3xl text-brown">
@@ -132,7 +132,7 @@ export default function Home() {
       </section>
 
       {/* How it works */}
-      <section className="py-16 bg-cream-dark">
+      <section className="py-16 border-t border-brown/10">
         <Container>
           <div className="text-center max-w-2xl mx-auto">
             <h2 className="font-heading font-extrabold text-3xl text-brown">
@@ -142,7 +142,7 @@ export default function Home() {
           <div className="mt-10 grid sm:grid-cols-3 gap-6">
             {STEPS.map(({ step, title, body }) => (
               <div key={step} className="text-center px-4">
-                <div className="mx-auto h-12 w-12 rounded-full bg-orange text-white font-heading font-extrabold text-xl flex items-center justify-center">
+                <div className="mx-auto h-12 w-12 rounded-full bg-orange text-white font-heading font-extrabold text-xl flex items-center justify-center shadow-sm">
                   {step}
                 </div>
                 <h3 className="mt-4 font-heading font-bold text-lg text-brown">

@@ -13,7 +13,7 @@ export default function PageHero({
   children?: ReactNode;
 }) {
   return (
-    <section className="bg-yellow-soft py-12 sm:py-16">
+    <section className="bg-gradient-to-b from-yellow-soft to-cream py-12 sm:py-16">
       <Container className="text-center">
         {eyebrow && (
           <span className="inline-block bg-white text-orange font-heading font-bold text-xs px-3 py-1 rounded-full border-2 border-orange/20">

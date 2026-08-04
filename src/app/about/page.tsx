@@ -62,7 +62,7 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="mt-12 bg-cream-dark rounded-3xl p-8 text-center">
+          <div className="mt-12 bg-green-soft rounded-3xl p-8 text-center border-2 border-brown/10">
             <p className="font-heading font-bold text-xl text-brown">
               Want your cub in the next class?
             </p>
