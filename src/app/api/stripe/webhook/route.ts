@@ -1,4 +1,5 @@
 import Stripe from "stripe";
+import { after } from "next/server";
 import { getStripe } from "@/lib/stripe";
 import { supabaseAdmin } from "@/lib/supabase";
 import { sendOwnerNotification, sendParentEmail } from "@/lib/email";
@@ -67,37 +68,42 @@ export async function POST(request: Request) {
             ? ` for ${enrollmentWithRelations.sessions.name}`
             : "";
 
-        // The enrollment is already saved as active above — a failed email
-        // here shouldn't turn into a Stripe webhook retry loop, so we log
-        // and move on rather than letting it throw.
-        try {
-          await sendParentEmail(
-            enrollment.parent_email,
-            "You're signed up for Soccer Cubs! ⚽",
-            `
-              <p>Hi ${enrollment.parent_name},</p>
-              <p>${enrollment.child_name} is officially enrolled in Soccer Cubs at ${locationName}${enrollmentDetail}! We can't wait to see them on the field.</p>
-              ${
-                isRecurring
-                  ? `<p>You can manage your subscription anytime from the <a href="${billingUrl}">Manage My Subscription</a> page.</p>`
-                  : ""
-              }
-              <p>See you soon!<br/>Soccer Cubs</p>
-            `
-          );
-        } catch (err) {
-          console.error("Failed to send parent confirmation email", err);
-        }
+        // Stripe expects a fast response to consider a webhook delivered —
+        // the enrollment is already saved as active above, so send the
+        // (slower, network-bound) emails after responding instead of
+        // blocking on them. Blocking here previously caused real
+        // deliveries to intermittently exceed Stripe's timeout and get
+        // reported as failed, even though the enrollment itself saved fine.
+        after(async () => {
+          try {
+            await sendParentEmail(
+              enrollment.parent_email,
+              "You're signed up for Soccer Cubs! ⚽",
+              `
+                <p>Hi ${enrollment.parent_name},</p>
+                <p>${enrollment.child_name} is officially enrolled in Soccer Cubs at ${locationName}${enrollmentDetail}! We can't wait to see them on the field.</p>
+                ${
+                  isRecurring
+                    ? `<p>You can manage your subscription anytime from the <a href="${billingUrl}">Manage My Subscription</a> page.</p>`
+                    : ""
+                }
+                <p>See you soon!<br/>Soccer Cubs</p>
+              `
+            );
+          } catch (err) {
+            console.error("Failed to send parent confirmation email", err);
+          }
 
-        try {
-          await sendOwnerNotification(
-            `New signup: ${enrollment.child_name}`,
-            `<p><strong>${enrollment.child_name}</strong> just enrolled at <strong>${locationName}</strong>.</p>
-             <p>Parent: ${enrollment.parent_name} (${enrollment.parent_email})</p>`
-          );
-        } catch (err) {
-          console.error("Failed to send owner notification email", err);
-        }
+          try {
+            await sendOwnerNotification(
+              `New signup: ${enrollment.child_name}`,
+              `<p><strong>${enrollment.child_name}</strong> just enrolled at <strong>${locationName}</strong>.</p>
+               <p>Parent: ${enrollment.parent_name} (${enrollment.parent_email})</p>`
+            );
+          } catch (err) {
+            console.error("Failed to send owner notification email", err);
+          }
+        });
       }
       break;
     }
