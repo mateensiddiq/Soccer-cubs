@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Container from "@/components/Container";
 import { ButtonLink } from "@/components/Button";
-import { GrassBlob, PawPrint, SoccerBall, SunBurst } from "@/components/illustrations";
+import { Cloud, GrassField, PawPrint, SoccerBall, SunBurst } from "@/components/illustrations";
 
 const WHO_ITS_FOR = [
   {
@@ -43,8 +43,19 @@ export default function Home() {
   return (
     <div>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-yellow-soft">
-        <Container className="grid lg:grid-cols-2 gap-10 items-center py-14 sm:py-20">
+      <section
+        className="relative overflow-hidden bg-yellow-soft"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle, rgba(51,32,15,0.07) 1.5px, transparent 1.6px)",
+          backgroundSize: "24px 24px",
+        }}
+      >
+        <Cloud className="absolute top-6 left-2 w-24 sm:w-32 opacity-80 pointer-events-none" />
+        <Cloud className="absolute top-20 right-4 w-20 sm:w-28 opacity-70 pointer-events-none hidden sm:block" />
+        <SunBurst className="absolute -top-6 -right-6 h-24 w-24 sm:h-32 sm:w-32 opacity-90 pointer-events-none" />
+
+        <Container className="relative grid lg:grid-cols-2 gap-10 items-center pt-14 sm:pt-20 pb-24 sm:pb-28">
           <div className="text-center lg:text-left order-2 lg:order-1">
             <h1 className="font-heading font-extrabold text-4xl sm:text-5xl text-brown leading-tight">
               Big kicks. <br className="hidden sm:block" />
@@ -64,18 +75,21 @@ export default function Home() {
               </ButtonLink>
             </div>
           </div>
-          <div className="order-1 lg:order-2 flex justify-center">
+          <div className="order-1 lg:order-2 relative flex justify-center">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="h-56 w-56 sm:h-72 sm:w-72 rounded-full bg-yellow blur-3xl opacity-50" />
+            </div>
             <Image
               src="/images/brand/logo-full.png"
               alt="Soccer Cubs logo — a happy lion cub dribbling a soccer ball"
               width={480}
               height={480}
-              className="w-64 sm:w-80 lg:w-96 h-auto drop-shadow-lg"
+              className="relative w-64 sm:w-80 lg:w-96 h-auto drop-shadow-lg"
               preload
             />
           </div>
         </Container>
-        <GrassBlob className="w-full h-10 sm:h-14 -mb-1" />
+        <GrassField className="absolute bottom-0 left-0 w-full h-20 sm:h-28" />
       </section>
 
       {/* Who it's for */}
