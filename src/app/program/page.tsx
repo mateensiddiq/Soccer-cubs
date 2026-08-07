@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Container from "@/components/Container";
 import PageHero from "@/components/PageHero";
 import { ButtonLink } from "@/components/Button";
@@ -85,6 +86,17 @@ export default function ProgramPage() {
             Classes run for about 30 minutes, right at your daycare, using
             soft training balls and gear sized for little feet.
           </p>
+          <div className="mt-8 flex justify-center">
+            <div className="w-56 sm:w-72 rounded-3xl overflow-hidden border-2 border-brown/10 shadow-sm">
+              <Image
+                src="/images/photos/class-action-1.jpg"
+                alt="Kids dribbling soccer balls during a Soccer Cubs class"
+                width={600}
+                height={338}
+                className="w-full h-auto"
+              />
+            </div>
+          </div>
           <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {CLASS_FLOW.map((item, i) => (
               <div key={item.title} className="text-center px-2">

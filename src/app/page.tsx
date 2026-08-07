@@ -15,8 +15,8 @@ const WHO_ITS_FOR = [
     icon: SunBurst,
   },
   {
-    title: "Coach-led & confidence-building",
-    body: "Every class is led by a coach who knows how to keep little ones moving, laughing, and learning.",
+    title: "Same Coach, Every Class",
+    body: "Coach Mateen leads every session himself and talks with parents directly — building real safety and familiarity for cubs and families alike, not a new face every few months.",
     icon: PawPrint,
   },
 ];
@@ -68,7 +68,7 @@ export default function Home() {
             </p>
             <div className="mt-7 flex flex-wrap gap-3 justify-center lg:justify-start">
               <ButtonLink href="/signup" variant="primary">
-                Sign Up My Cub ⚽
+                Sign Up
               </ButtonLink>
               <ButtonLink href="/for-daycares" variant="outline">
                 I&apos;m a Daycare Director
@@ -117,30 +117,6 @@ export default function Home() {
                 <p className="mt-2 text-sm text-brown-soft">{body}</p>
               </div>
             ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* Real class photo */}
-      <section className="py-16 border-t border-brown/10">
-        <Container>
-          <div className="text-center max-w-2xl mx-auto mb-10">
-            <h2 className="font-heading font-extrabold text-3xl text-brown">
-              See Soccer Cubs in action
-            </h2>
-            <p className="mt-3 text-brown-soft">
-              Real cubs, real classes &mdash; dribbling, giggling, and
-              learning to love the game.
-            </p>
-          </div>
-          <div className="rounded-[2rem] overflow-hidden border-2 border-brown/10 shadow-sm">
-            <Image
-              src="/images/photos/class-action-1.jpg"
-              alt="Kids dribbling soccer balls during a Soccer Cubs class"
-              width={2000}
-              height={1125}
-              className="w-full h-auto"
-            />
           </div>
         </Container>
       </section>

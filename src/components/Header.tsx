@@ -112,7 +112,7 @@ export default function Header() {
               className="mt-2 sm:hidden"
               onClick={() => setOpen(false)}
             >
-              Sign Up ⚽
+              Sign Up
             </ButtonLink>
           </Container>
         </div>
