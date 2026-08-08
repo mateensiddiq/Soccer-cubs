@@ -62,7 +62,7 @@ export default function Header() {
             variant="primary"
             className="hidden sm:inline-flex !text-sm !py-2.5 !px-5"
           >
-            Sign Up ⚽
+            Sign Up
           </ButtonLink>
           <button
             type="button"
