@@ -30,17 +30,39 @@ export type Session = {
   created_at: string;
 };
 
+export type ClassGroup = {
+  id: string;
+  location_id: string;
+  label: string;
+  age_range: string | null;
+  time_range: string | null;
+  display_order: number;
+  active: boolean;
+  created_at: string;
+};
+
 export type Enrollment = {
   id: string;
   location_id: string;
   session_id: string | null;
   is_full_year: boolean;
+  class_group_id: string | null;
   child_name: string;
   child_dob: string;
+  child_address: string | null;
+  child_city: string | null;
+  child_state: string | null;
+  child_zip: string | null;
   notes: string | null;
   parent_name: string;
   parent_email: string;
   parent_phone: string | null;
+  parent2_name: string | null;
+  parent2_phone: string | null;
+  emergency1_name: string;
+  emergency1_phone: string;
+  emergency2_name: string | null;
+  emergency2_phone: string | null;
   stripe_customer_id: string | null;
   stripe_subscription_id: string | null;
   status: "pending" | "active" | "canceled" | "past_due";

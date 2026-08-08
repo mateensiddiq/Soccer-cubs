@@ -5,7 +5,6 @@ import Container from "./Container";
 const FOOTER_LINKS = [
   { href: "/program", label: "Program" },
   { href: "/about", label: "About the Coach" },
-  { href: "/locations", label: "Locations" },
   { href: "/for-daycares", label: "For Daycares" },
   { href: "/birthdays", label: "Birthdays & Events" },
   { href: "/contact", label: "Contact" },

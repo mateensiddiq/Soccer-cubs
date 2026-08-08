@@ -41,18 +41,44 @@ create table if not exists sessions (
   created_at timestamptz not null default now()
 );
 
+-- One row per named class time at a location (e.g. Sugarland's "Group 1:
+-- 2:30-3:00pm, ages 2-3" and "Group 2: 3:15-3:45pm, ages 4-5"; Harmony's
+-- single "After School" class). A location with only one active group
+-- doesn't need a picker on the sign-up form — it's assumed automatically.
+create table if not exists class_groups (
+  id uuid primary key default gen_random_uuid(),
+  location_id uuid not null references locations(id),
+  label text not null,
+  age_range text,
+  time_range text,
+  display_order integer not null default 0,
+  active boolean not null default true,
+  created_at timestamptz not null default now()
+);
+
 -- One row per enrolled child, created automatically once payment succeeds.
 create table if not exists enrollments (
   id uuid primary key default gen_random_uuid(),
   location_id uuid references locations(id),
   session_id uuid references sessions(id),
   is_full_year boolean not null default false,
+  class_group_id uuid references class_groups(id),
   child_name text not null,
   child_dob date not null,
+  child_address text,
+  child_city text,
+  child_state text,
+  child_zip text,
   notes text,
   parent_name text not null,
   parent_email text not null,
   parent_phone text,
+  parent2_name text,
+  parent2_phone text,
+  emergency1_name text not null default '',
+  emergency1_phone text not null default '',
+  emergency2_name text,
+  emergency2_phone text,
   stripe_customer_id text,
   stripe_subscription_id text,
   status text not null default 'pending',
@@ -78,5 +104,6 @@ create table if not exists inquiries (
 -- anything a parent's browser can see before they're supposed to.
 alter table locations enable row level security;
 alter table sessions enable row level security;
+alter table class_groups enable row level security;
 alter table enrollments enable row level security;
 alter table inquiries enable row level security;

@@ -45,7 +45,7 @@ export async function POST(request: Request) {
         })
         .eq("id", enrollmentId)
         .select(
-          "child_name, parent_name, parent_email, location_id, is_full_year, locations(name), sessions(name)"
+          "child_name, parent_name, parent_email, location_id, is_full_year, locations(name), sessions(name), class_groups(label)"
         )
         .single();
 
@@ -53,8 +53,10 @@ export async function POST(request: Request) {
         const enrollmentWithRelations = enrollment as unknown as {
           locations?: { name?: string };
           sessions?: { name?: string };
+          class_groups?: { label?: string };
         };
         const locationName = enrollmentWithRelations.locations?.name ?? "your daycare";
+        const groupLabel = enrollmentWithRelations.class_groups?.label;
         const origin = request.headers.get("origin") ?? new URL(request.url).origin;
         const billingUrl = `${origin}/billing`;
 
@@ -81,7 +83,7 @@ export async function POST(request: Request) {
               "You're signed up for Soccer Cubs! ⚽",
               `
                 <p>Hi ${enrollment.parent_name},</p>
-                <p>${enrollment.child_name} is officially enrolled in Soccer Cubs at ${locationName}${enrollmentDetail}! We can't wait to see them on the field.</p>
+                <p>${enrollment.child_name} is officially enrolled in Soccer Cubs at ${locationName}${enrollmentDetail}${groupLabel ? ` (${groupLabel})` : ""}! We can't wait to see them on the field.</p>
                 ${
                   isRecurring
                     ? `<p>You can manage your subscription anytime from the <a href="${billingUrl}">Manage My Subscription</a> page.</p>`
@@ -97,7 +99,7 @@ export async function POST(request: Request) {
           try {
             await sendOwnerNotification(
               `New signup: ${enrollment.child_name}`,
-              `<p><strong>${enrollment.child_name}</strong> just enrolled at <strong>${locationName}</strong>.</p>
+              `<p><strong>${enrollment.child_name}</strong> just enrolled at <strong>${locationName}</strong>${groupLabel ? ` (${groupLabel})` : ""}.</p>
                <p>Parent: ${enrollment.parent_name} (${enrollment.parent_email})</p>`
             );
           } catch (err) {
