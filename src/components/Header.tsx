@@ -20,6 +20,8 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
+  if (pathname.startsWith("/admin")) return null;
+
   return (
     <header className="sticky top-0 z-50 bg-cream/95 backdrop-blur border-b-2 border-brown/10 shadow-sm">
       <Container className="flex items-center justify-between py-3">

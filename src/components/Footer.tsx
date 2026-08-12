@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Container from "./Container";
 
 const FOOTER_LINKS = [
@@ -12,6 +15,10 @@ const FOOTER_LINKS = [
 ];
 
 export default function Footer() {
+  const pathname = usePathname();
+
+  if (pathname.startsWith("/admin")) return null;
+
   return (
     <footer className="bg-yellow-soft border-t-2 border-brown/10 mt-16">
       <Container className="py-10 grid gap-8 sm:grid-cols-3">
