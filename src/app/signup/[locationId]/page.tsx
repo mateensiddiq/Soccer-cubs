@@ -51,11 +51,11 @@ export default async function SchoolSignupPage({
 
       <section className="py-14">
         <Container className="max-w-xl">
-          {classGroups.length > 0 && (
-            <div className="mb-8 bg-white rounded-3xl p-6 border-2 border-brown/10 shadow-sm">
-              <h2 className="font-heading font-bold text-lg text-brown">
-                {classGroups.length > 1 ? "Class Times" : "Class Time"}
-              </h2>
+          <div className="mb-8 bg-white rounded-3xl p-6 border-2 border-brown/10 shadow-sm">
+            <h2 className="font-heading font-bold text-lg text-brown">
+              {classGroups.length > 1 ? "Class Times" : "Class Time"}
+            </h2>
+            {classGroups.length > 0 ? (
               <div className="mt-3 space-y-2">
                 {classGroups.map((g) => (
                   <p key={g.id} className="text-sm text-brown-soft">
@@ -66,8 +66,13 @@ export default async function SchoolSignupPage({
                   </p>
                 ))}
               </div>
-            </div>
-          )}
+            ) : (
+              <p className="mt-3 text-sm text-brown-soft">
+                Schedule coming soon — sign up now and we&apos;ll follow up
+                with your exact class time before your first class.
+              </p>
+            )}
+          </div>
 
           <SchoolSignupForm
             location={location}
