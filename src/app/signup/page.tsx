@@ -3,7 +3,7 @@ import Container from "@/components/Container";
 import PageHero from "@/components/PageHero";
 import { ButtonLink } from "@/components/Button";
 import { PawPrint } from "@/components/illustrations";
-import { getPublicLocations, getPublicClassGroups } from "@/lib/locations";
+import { getPublicLocations } from "@/lib/locations";
 
 export const metadata: Metadata = {
   title: "Sign Up | Soccer Cubs",
@@ -17,17 +17,6 @@ export const revalidate = 60;
 
 export default async function SignupPage() {
   const locations = await getPublicLocations();
-
-  const timesByLocation: Record<string, string> = {};
-  await Promise.all(
-    locations.map(async (loc) => {
-      const groups = await getPublicClassGroups(loc.id);
-      const times = groups.map((g) => g.time_range).filter((t): t is string => Boolean(t));
-      if (times.length > 0) {
-        timesByLocation[loc.id] = times.join(" & ");
-      }
-    })
-  );
 
   return (
     <div>
@@ -66,7 +55,6 @@ export default async function SignupPage() {
                   {location.class_day ? (
                     <p className="mt-1 text-sm font-semibold text-orange">
                       Classes: {location.class_day}
-                      {timesByLocation[location.id] && `, ${timesByLocation[location.id]}`}
                     </p>
                   ) : (
                     <p className="mt-1 text-sm font-semibold text-brown-soft">
