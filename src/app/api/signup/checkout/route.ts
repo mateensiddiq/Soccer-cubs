@@ -41,7 +41,7 @@ export async function POST(request: Request) {
   const { data: location, error: locationError } = await db
     .from("locations")
     .select(
-      "id, name, active, pricing_mode, stripe_price_id, full_year_price_cents, full_year_stripe_price_id"
+      "id, name, active, pricing_mode, stripe_price_id, full_year_price_cents, full_year_stripe_price_id, first_billing_date"
     )
     .eq("id", locationId)
     .single();
@@ -129,6 +129,18 @@ export async function POST(request: Request) {
     );
   }
 
+  // If this location has a future first_billing_date, defer the first
+  // charge to that date instead of billing immediately — the card is
+  // still collected and saved now, Stripe just won't charge it until
+  // then, and bills normally every month after that.
+  let trialEnd: number | undefined;
+  if (mode === "subscription" && location.first_billing_date) {
+    const billingStart = new Date(`${location.first_billing_date}T00:00:00-04:00`).getTime();
+    if (billingStart > Date.now()) {
+      trialEnd = Math.floor(billingStart / 1000);
+    }
+  }
+
   const origin = request.headers.get("origin") ?? new URL(request.url).origin;
   const stripe = getStripe();
 
@@ -139,7 +151,12 @@ export async function POST(request: Request) {
     ...(mode === "payment" ? { customer_creation: "always" as const } : {}),
     client_reference_id: enrollment.id,
     ...(mode === "subscription"
-      ? { subscription_data: { metadata: { enrollment_id: enrollment.id } } }
+      ? {
+          subscription_data: {
+            metadata: { enrollment_id: enrollment.id },
+            ...(trialEnd ? { trial_end: trialEnd } : {}),
+          },
+        }
       : {}),
     metadata: { enrollment_id: enrollment.id },
     success_url: `${origin}/signup/success?session_id={CHECKOUT_SESSION_ID}`,

@@ -22,6 +22,10 @@ create table if not exists locations (
   stripe_price_id text,
   full_year_price_cents integer,
   full_year_stripe_price_id text,
+  -- If set (and in the future), a monthly location's first Stripe charge
+  -- is deferred to this date instead of billing immediately on signup.
+  -- Ignored once the date has passed.
+  first_billing_date date,
   created_at timestamptz not null default now()
 );
 

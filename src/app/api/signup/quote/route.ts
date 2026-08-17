@@ -30,7 +30,9 @@ export async function POST(request: Request) {
 
   const { data: location, error } = await db
     .from("locations")
-    .select("id, name, active, pricing_mode, monthly_price_cents, full_year_price_cents")
+    .select(
+      "id, name, active, pricing_mode, monthly_price_cents, full_year_price_cents, first_billing_date"
+    )
     .eq("id", locationId)
     .single();
 
@@ -39,9 +41,14 @@ export async function POST(request: Request) {
   }
 
   if (location.pricing_mode === "monthly") {
+    let billingNote: string | undefined;
+    if (location.first_billing_date && new Date(`${location.first_billing_date}T00:00:00-04:00`).getTime() > Date.now()) {
+      billingNote = `First charge on ${formatDate(location.first_billing_date)}, then monthly after that.`;
+    }
     return Response.json({
       label: location.name,
       priceCents: location.monthly_price_cents,
+      billingNote,
     });
   }
 

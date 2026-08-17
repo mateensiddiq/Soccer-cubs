@@ -82,7 +82,9 @@ export default function SchoolSignupForm({
     classGroups.length === 1 ? classGroups[0].id : ""
   );
   const [info, setInfo] = useState<ChildInfo>(EMPTY_INFO);
-  const [quote, setQuote] = useState<{ label: string; priceCents: number } | null>(null);
+  const [quote, setQuote] = useState<{ label: string; priceCents: number; billingNote?: string } | null>(
+    null
+  );
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -451,6 +453,11 @@ export default function SchoolSignupForm({
                 ? "One-time payment."
                 : 'Billed monthly, cancel anytime from "Manage My Subscription."'}
             </p>
+            {quote.billingNote && (
+              <p className="mt-2 text-sm font-semibold text-orange-dark bg-white rounded-xl px-3 py-2 inline-block">
+                {quote.billingNote}
+              </p>
+            )}
           </div>
 
           <div className="rounded-2xl border-2 border-brown/10 p-5 text-sm space-y-1.5">

@@ -13,6 +13,7 @@ export type Location = {
   stripe_price_id: string | null;
   full_year_price_cents: number | null;
   full_year_stripe_price_id: string | null;
+  first_billing_date: string | null;
   created_at: string;
 };
 
