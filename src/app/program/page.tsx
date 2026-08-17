@@ -87,7 +87,7 @@ export default function ProgramPage() {
             soft training balls and gear sized for little feet.
           </p>
           <div className="mt-8 flex justify-center">
-            <div className="w-56 sm:w-72 rounded-3xl overflow-hidden border-2 border-brown/10 shadow-sm">
+            <div className="w-[28rem] sm:w-[36rem] max-w-full rounded-3xl overflow-hidden border-2 border-brown/10 shadow-sm">
               <Image
                 src="/images/photos/class-action-1.jpg"
                 alt="Kids dribbling soccer balls during a Soccer Cubs class"
