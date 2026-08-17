@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Container from "@/components/Container";
 import PageHero from "@/components/PageHero";
-import { ButtonLink } from "@/components/Button";
 
 export const metadata: Metadata = {
   title: "About the Coach | Soccer Cubs",
@@ -59,17 +58,6 @@ export default function AboutPage() {
                 it ever became a business &mdash; built from real experience
                 on the field, not a business plan.
               </p>
-            </div>
-          </div>
-
-          <div className="mt-12 bg-green-soft rounded-3xl p-8 text-center border-2 border-brown/10">
-            <p className="font-heading font-bold text-xl text-brown">
-              Want your cub in the next class?
-            </p>
-            <div className="mt-4">
-              <ButtonLink href="/signup" variant="primary">
-                Sign Up ⚽
-              </ButtonLink>
             </div>
           </div>
         </Container>

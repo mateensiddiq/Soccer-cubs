@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Container from "@/components/Container";
 import PageHero from "@/components/PageHero";
-import { ButtonLink } from "@/components/Button";
 import { PawPrint, SoccerBall, SunBurst } from "@/components/illustrations";
 
 export const metadata: Metadata = {
@@ -114,9 +113,9 @@ export default function ProgramPage() {
       </section>
 
       <section className="py-16 border-t border-brown/10">
-        <Container className="grid lg:grid-cols-2 gap-10 items-center">
-          <div>
-            <SunBurst className="h-14 w-14" />
+        <Container>
+          <div className="text-center max-w-2xl mx-auto">
+            <SunBurst className="h-14 w-14 mx-auto" />
             <h2 className="mt-3 font-heading font-extrabold text-3xl text-brown">
               Skills we build along the way
             </h2>
@@ -124,32 +123,18 @@ export default function ProgramPage() {
               Soccer is the fun part — but every class is quietly building
               skills that help on and off the field.
             </p>
-            <ul className="mt-5 grid sm:grid-cols-2 gap-3">
-              {SKILLS.map((skill) => (
-                <li
-                  key={skill}
-                  className="flex items-center gap-2 text-sm font-semibold text-brown"
-                >
-                  <PawPrint className="h-5 w-5 text-orange shrink-0" />
-                  {skill}
-                </li>
-              ))}
-            </ul>
           </div>
-          <div className="bg-green-soft rounded-[2.5rem] p-10 text-center border-2 border-brown/10">
-            <p className="font-heading font-bold text-xl text-brown">
-              Ready to sign your cub up?
-            </p>
-            <p className="mt-2 text-brown-soft text-sm">
-              Pick your daycare location and see class days &amp; pricing in
-              the sign-up flow.
-            </p>
-            <div className="mt-5">
-              <ButtonLink href="/signup" variant="primary">
-                Sign Up ⚽
-              </ButtonLink>
-            </div>
-          </div>
+          <ul className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-3xl mx-auto">
+            {SKILLS.map((skill) => (
+              <li
+                key={skill}
+                className="flex items-center gap-2 text-sm font-semibold text-brown bg-white rounded-2xl px-4 py-3 border-2 border-brown/10 shadow-sm"
+              >
+                <PawPrint className="h-5 w-5 text-orange shrink-0" />
+                {skill}
+              </li>
+            ))}
+          </ul>
         </Container>
       </section>
     </div>
