@@ -3,6 +3,7 @@ import { after } from "next/server";
 import { getStripe } from "@/lib/stripe";
 import { supabaseAdmin } from "@/lib/supabase";
 import { sendOwnerNotification, sendParentEmail } from "@/lib/email";
+import { computeMonthlyBillingPlan } from "@/lib/monthlyBilling";
 
 export async function POST(request: Request) {
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -45,13 +46,13 @@ export async function POST(request: Request) {
         })
         .eq("id", enrollmentId)
         .select(
-          "child_name, parent_name, parent_email, location_id, is_full_year, locations(name), sessions(name), class_groups(label)"
+          "child_name, parent_name, parent_email, location_id, is_full_year, created_at, locations(name, first_billing_date, monthly_price_cents), sessions(name), class_groups(label)"
         )
         .single();
 
       if (enrollment) {
         const enrollmentWithRelations = enrollment as unknown as {
-          locations?: { name?: string };
+          locations?: { name?: string; first_billing_date: string | null; monthly_price_cents: number | null };
           sessions?: { name?: string };
           class_groups?: { label?: string };
         };
@@ -59,6 +60,12 @@ export async function POST(request: Request) {
         const groupLabel = enrollmentWithRelations.class_groups?.label;
         const origin = request.headers.get("origin") ?? new URL(request.url).origin;
         const billingUrl = `${origin}/billing`;
+        const billingNote = enrollmentWithRelations.locations
+          ? computeMonthlyBillingPlan(
+              enrollmentWithRelations.locations,
+              new Date(enrollment.created_at)
+            ).billingNote
+          : undefined;
 
         // Recurring monthly enrollments have a real subscription to manage;
         // one-time session/full-year payments don't, so don't point them at
@@ -84,6 +91,7 @@ export async function POST(request: Request) {
               `
                 <p>Hi ${enrollment.parent_name},</p>
                 <p>${enrollment.child_name} is officially enrolled in Soccer Cubs at ${locationName}${enrollmentDetail}${groupLabel ? ` (${groupLabel})` : ""}! We can't wait to see them on the field.</p>
+                ${billingNote ? `<p><strong>${billingNote}</strong></p>` : ""}
                 ${
                   isRecurring
                     ? `<p>You can manage your subscription anytime from the <a href="${billingUrl}">Manage My Subscription</a> page.</p>`
@@ -112,10 +120,31 @@ export async function POST(request: Request) {
 
     case "customer.subscription.deleted": {
       const subscription = event.data.object as Stripe.Subscription;
-      await db
+      const { data: enrollment } = await db
         .from("enrollments")
         .update({ status: "canceled" })
-        .eq("stripe_subscription_id", subscription.id);
+        .eq("stripe_subscription_id", subscription.id)
+        .select("child_name, parent_name, parent_email, locations(name)")
+        .single();
+
+      if (enrollment) {
+        const enrollmentWithLocation = enrollment as unknown as {
+          locations?: { name?: string };
+        };
+        const locationName = enrollmentWithLocation.locations?.name ?? "Soccer Cubs";
+
+        after(async () => {
+          try {
+            await sendOwnerNotification(
+              `Subscription canceled: ${enrollment.child_name}`,
+              `<p><strong>${enrollment.child_name}</strong>'s Soccer Cubs membership at <strong>${locationName}</strong> was just canceled.</p>
+               <p>Parent: ${enrollment.parent_name} (${enrollment.parent_email})</p>`
+            );
+          } catch (err) {
+            console.error("Failed to send subscription-canceled owner notification", err);
+          }
+        });
+      }
       break;
     }
 

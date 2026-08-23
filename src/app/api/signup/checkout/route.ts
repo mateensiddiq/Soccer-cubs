@@ -1,6 +1,7 @@
 import { supabaseAdmin } from "@/lib/supabase";
 import { getStripe } from "@/lib/stripe";
 import { signupChildInfoSchema } from "@/lib/validation";
+import { computeMonthlyBillingPlan } from "@/lib/monthlyBilling";
 
 export async function POST(request: Request) {
   const json = await request.json().catch(() => null);
@@ -41,7 +42,7 @@ export async function POST(request: Request) {
   const { data: location, error: locationError } = await db
     .from("locations")
     .select(
-      "id, name, active, pricing_mode, stripe_price_id, full_year_price_cents, full_year_stripe_price_id, first_billing_date"
+      "id, name, active, pricing_mode, stripe_price_id, monthly_price_cents, full_year_price_cents, full_year_stripe_price_id, first_billing_date"
     )
     .eq("id", locationId)
     .single();
@@ -129,24 +130,38 @@ export async function POST(request: Request) {
     );
   }
 
-  // If this location has a future first_billing_date, defer the first
-  // charge to that date instead of billing immediately — the card is
-  // still collected and saved now, Stripe just won't charge it until
-  // then, and bills normally every month after that.
-  let trialEnd: number | undefined;
-  if (mode === "subscription" && location.first_billing_date) {
-    const billingStart = new Date(`${location.first_billing_date}T00:00:00-04:00`).getTime();
-    if (billingStart > Date.now()) {
-      trialEnd = Math.floor(billingStart / 1000);
-    }
-  }
+  // For monthly locations, figure out whether the first charge should be
+  // deferred (pre-launch), and whether this parent is signing up late
+  // enough in the month to get a discounted or free partial first month.
+  // See src/lib/monthlyBilling.ts for the exact policy.
+  const billingPlan =
+    mode === "subscription"
+      ? computeMonthlyBillingPlan({
+          first_billing_date: location.first_billing_date,
+          monthly_price_cents: location.monthly_price_cents,
+        })
+      : {};
 
   const origin = request.headers.get("origin") ?? new URL(request.url).origin;
   const stripe = getStripe();
 
   const session = await stripe.checkout.sessions.create({
     mode,
-    line_items: [{ price: stripePriceId, quantity: 1 }],
+    line_items: [
+      { price: stripePriceId, quantity: 1 },
+      ...(billingPlan.immediateChargeCents
+        ? [
+            {
+              price_data: {
+                currency: "usd",
+                unit_amount: billingPlan.immediateChargeCents,
+                product_data: { name: "Prorated first month (50% off)" },
+              },
+              quantity: 1,
+            },
+          ]
+        : []),
+    ],
     customer_email: parentEmail,
     ...(mode === "payment" ? { customer_creation: "always" as const } : {}),
     client_reference_id: enrollment.id,
@@ -154,7 +169,7 @@ export async function POST(request: Request) {
       ? {
           subscription_data: {
             metadata: { enrollment_id: enrollment.id },
-            ...(trialEnd ? { trial_end: trialEnd } : {}),
+            ...(billingPlan.trialEnd ? { trial_end: billingPlan.trialEnd } : {}),
           },
         }
       : {}),

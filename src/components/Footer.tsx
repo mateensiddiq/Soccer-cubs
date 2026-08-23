@@ -10,6 +10,7 @@ const FOOTER_LINKS = [
   { href: "/about", label: "About the Coach" },
   { href: "/for-daycares", label: "For Daycares" },
   { href: "/birthdays", label: "Birthdays & Events" },
+  { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
   { href: "/billing", label: "Manage My Subscription" },
 ];

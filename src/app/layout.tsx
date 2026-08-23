@@ -17,6 +17,7 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.joinsoccercubs.com"),
   title: "Soccer Cubs | On-Site Soccer Classes for Little Ones in Northern VA",
   description:
     "Soccer Cubs brings playful, coach-led soccer classes right to daycares across Northern Virginia for kids ages 2 and up. Sign up online or bring us to your daycare.",

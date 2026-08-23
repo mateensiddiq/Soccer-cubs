@@ -1,18 +1,12 @@
 import { z } from "zod";
 import { supabaseAdmin } from "@/lib/supabase";
+import { computeMonthlyBillingPlan, formatDate } from "@/lib/monthlyBilling";
 
 const bodySchema = z.object({
   locationId: z.string().uuid(),
   sessionId: z.string().uuid().optional(),
   fullYear: z.boolean().optional(),
 });
-
-function formatDate(dateStr: string) {
-  return new Date(`${dateStr}T00:00:00`).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-  });
-}
 
 // This is the only endpoint that ever returns a price to the browser, and
 // only for the single location/session the parent just selected — never a
@@ -41,10 +35,7 @@ export async function POST(request: Request) {
   }
 
   if (location.pricing_mode === "monthly") {
-    let billingNote: string | undefined;
-    if (location.first_billing_date && new Date(`${location.first_billing_date}T00:00:00-04:00`).getTime() > Date.now()) {
-      billingNote = `First charge on ${formatDate(location.first_billing_date)}, then monthly after that.`;
-    }
+    const { billingNote } = computeMonthlyBillingPlan(location);
     return Response.json({
       label: location.name,
       priceCents: location.monthly_price_cents,

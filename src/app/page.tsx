@@ -1,7 +1,12 @@
 import Image from "next/image";
 import Container from "@/components/Container";
 import { ButtonLink } from "@/components/Button";
-import { Cloud, GrassField, PawPrint, SoccerBall, SunBurst } from "@/components/illustrations";
+import { Cloud, GrassField, PawPrint, ShieldCheck, SoccerBall, SunBurst } from "@/components/illustrations";
+
+const CREDENTIALS = [
+  "USSF D-License Certified Coach",
+  "SafeSport Certified",
+];
 
 const WHO_ITS_FOR = [
   {
@@ -90,6 +95,21 @@ export default function Home() {
           </div>
         </Container>
         <GrassField className="absolute bottom-0 left-0 w-full h-20 sm:h-28" />
+      </section>
+
+      {/* Trust badges */}
+      <section className="py-5 bg-white border-b border-brown/10">
+        <Container className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+          {CREDENTIALS.map((label) => (
+            <div
+              key={label}
+              className="flex items-center gap-2 bg-green-soft rounded-full pl-2.5 pr-4 py-1.5"
+            >
+              <ShieldCheck className="h-6 w-6 text-green shrink-0" />
+              <span className="text-sm font-semibold text-brown">{label}</span>
+            </div>
+          ))}
+        </Container>
       </section>
 
       {/* Who it's for */}

@@ -38,7 +38,7 @@ export async function POST(request: Request) {
 
   const token = createBillingToken(enrollment.stripe_customer_id);
   const origin = request.headers.get("origin") ?? new URL(request.url).origin;
-  const link = `${origin}/billing/verify?token=${encodeURIComponent(token)}`;
+  const link = `${origin}/billing/manage?token=${encodeURIComponent(token)}`;
 
   await sendParentEmail(
     parsed.data.email,

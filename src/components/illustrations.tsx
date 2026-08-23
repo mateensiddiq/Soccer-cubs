@@ -108,6 +108,25 @@ export function Cloud({ className = "" }: { className?: string }) {
   );
 }
 
+export function ShieldCheck({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 100 100" className={className} aria-hidden="true">
+      <path
+        d="M50 8 L84 20 V46 C84 68 70 84 50 92 C30 84 16 68 16 46 V20 Z"
+        fill="currentColor"
+      />
+      <path
+        d="M34 50 L45 61 L67 38"
+        fill="none"
+        stroke="#fff8e9"
+        strokeWidth="7"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export function WavyDivider({
   className = "",
   color = "#fff8e9",
