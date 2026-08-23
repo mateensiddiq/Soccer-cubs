@@ -5,9 +5,19 @@ import { supabaseAdmin } from "@/lib/supabase";
 import { sendOwnerNotification, sendParentEmail } from "@/lib/email";
 import { computeMonthlyBillingPlan } from "@/lib/monthlyBilling";
 
+// Live and test mode each sign with their own secret, even though both send
+// to this same URL. STRIPE_WEBHOOK_SECRET_TEST is optional — set it to also
+// accept test-mode events (e.g. for safely trying out changes) without ever
+// touching STRIPE_WEBHOOK_SECRET, which is what verifies real live events.
+function getWebhookSecrets(): string[] {
+  return [process.env.STRIPE_WEBHOOK_SECRET, process.env.STRIPE_WEBHOOK_SECRET_TEST].filter(
+    (secret): secret is string => Boolean(secret)
+  );
+}
+
 export async function POST(request: Request) {
-  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
-  if (!webhookSecret) {
+  const webhookSecrets = getWebhookSecrets();
+  if (webhookSecrets.length === 0) {
     console.error("Missing STRIPE_WEBHOOK_SECRET environment variable.");
     return Response.json({ error: "Webhook not configured." }, { status: 500 });
   }
@@ -20,12 +30,20 @@ export async function POST(request: Request) {
   }
 
   const stripe = getStripe();
-  let event: Stripe.Event;
+  let event: Stripe.Event | undefined;
+  let verificationError: unknown;
 
-  try {
-    event = stripe.webhooks.constructEvent(rawBody, signature, webhookSecret);
-  } catch (err) {
-    console.error("Stripe webhook signature verification failed", err);
+  for (const secret of webhookSecrets) {
+    try {
+      event = stripe.webhooks.constructEvent(rawBody, signature, secret);
+      break;
+    } catch (err) {
+      verificationError = err;
+    }
+  }
+
+  if (!event) {
+    console.error("Stripe webhook signature verification failed", verificationError);
     return Response.json({ error: "Invalid signature." }, { status: 400 });
   }
 
