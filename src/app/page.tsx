@@ -75,9 +75,6 @@ export default function Home() {
               <ButtonLink href="/signup" variant="primary">
                 Sign Up
               </ButtonLink>
-              <ButtonLink href="/for-daycares" variant="outline">
-                I&apos;m a Daycare Director
-              </ButtonLink>
             </div>
           </div>
           <div className="order-1 lg:order-2 relative flex justify-center">
