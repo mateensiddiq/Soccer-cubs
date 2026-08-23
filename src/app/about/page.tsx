@@ -18,18 +18,15 @@ export default function AboutPage() {
         <Container className="max-w-3xl">
           <div className="grid sm:grid-cols-[200px_1fr] gap-8 items-start">
             <div>
-              <div className="mx-auto sm:mx-0 h-48 w-48 rounded-full bg-yellow-soft border-4 border-white shadow-md flex items-center justify-center overflow-hidden">
+              <div className="mx-auto sm:mx-0 h-48 w-48 rounded-full border-4 border-white shadow-md overflow-hidden">
                 <Image
-                  src="/images/brand/cub.png"
-                  alt="Soccer Cubs mascot"
-                  width={160}
-                  height={160}
-                  className="h-32 w-32 object-contain"
+                  src="/images/brand/coach-mateen.jpg"
+                  alt="Coach Mateen"
+                  width={192}
+                  height={192}
+                  className="h-full w-full object-cover"
                 />
               </div>
-              <p className="mt-2 text-center sm:text-left text-xs text-brown-soft/70">
-                Real photo coming soon!
-              </p>
             </div>
             <div>
               <h2 className="font-heading font-extrabold text-2xl text-brown">
