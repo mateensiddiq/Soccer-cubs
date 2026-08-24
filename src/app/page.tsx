@@ -161,11 +161,10 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <div className="mt-10 flex justify-center">
-            <ButtonLink href="/signup" variant="primary">
-              Start Sign Up ⚽
-            </ButtonLink>
-          </div>
+          <p className="mt-10 text-center text-sm text-brown-soft">
+            No long-term commitment — you can edit your info or cancel for
+            next month anytime.
+          </p>
         </Container>
       </section>
     </div>
