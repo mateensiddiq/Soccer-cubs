@@ -162,8 +162,8 @@ export default function Home() {
             ))}
           </div>
           <p className="mt-10 text-center text-sm text-brown-soft">
-            No long-term commitment — you can edit your info or cancel for
-            next month anytime.
+            No long-term commitment — you can edit your info or cancel
+            anytime.
           </p>
         </Container>
       </section>
