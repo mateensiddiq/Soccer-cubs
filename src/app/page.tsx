@@ -6,6 +6,8 @@ import { Cloud, GrassField, PawPrint, ShieldCheck, SoccerBall, SunBurst } from "
 const CREDENTIALS = [
   "USSF D-License Certified Coach",
   "SafeSport Certified",
+  "Grassroots Coaching Licensed",
+  "7+ Years Coaching Childcare-Age Kids",
 ];
 
 const WHO_ITS_FOR = [

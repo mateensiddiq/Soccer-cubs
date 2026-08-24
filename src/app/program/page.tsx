@@ -88,10 +88,10 @@ export default function ProgramPage() {
           <div className="mt-8 flex justify-center">
             <div className="w-[28rem] sm:w-[36rem] max-w-full rounded-3xl overflow-hidden border-2 border-brown/10 shadow-sm">
               <Image
-                src="/images/photos/class-action-1.jpg"
+                src="/images/photos/class-action-2.jpg"
                 alt="Kids dribbling soccer balls during a Soccer Cubs class"
                 width={600}
-                height={338}
+                height={360}
                 className="w-full h-auto"
               />
             </div>
