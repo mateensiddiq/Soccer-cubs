@@ -25,14 +25,18 @@ export default function Footer() {
           <div className="flex items-center gap-2">
             <Image
               src="/images/brand/cub.png"
-              alt="Soccer Cubs mascot"
+              alt=""
               width={40}
               height={40}
               className="h-10 w-10 object-contain"
             />
-            <span className="font-heading font-extrabold text-lg text-brown">
-              Soccer Cubs
-            </span>
+            <Image
+              src="/images/brand/wordmark.png"
+              alt="Soccer Cubs"
+              width={780}
+              height={320}
+              className="h-8 w-auto"
+            />
           </div>
           <p className="mt-3 text-sm text-brown-soft max-w-xs">
             Playful, coach-led soccer classes for ages 2 and up, brought

@@ -31,15 +31,20 @@ export default function Header() {
         >
           <Image
             src="/images/brand/cub.png"
-            alt="Soccer Cubs mascot"
+            alt=""
             width={48}
             height={48}
             className="h-11 w-11 object-contain"
             preload
           />
-          <span className="font-heading font-extrabold text-xl sm:text-2xl text-brown">
-            Soccer Cubs
-          </span>
+          <Image
+            src="/images/brand/wordmark.png"
+            alt="Soccer Cubs"
+            width={780}
+            height={320}
+            className="h-9 sm:h-10 w-auto"
+            preload
+          />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1">
