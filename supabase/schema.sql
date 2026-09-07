@@ -86,6 +86,10 @@ create table if not exists enrollments (
   stripe_customer_id text,
   stripe_subscription_id text,
   status text not null default 'pending',
+  -- When the "day before first class" welcome email was sent (or, for
+  -- enrollments backfilled by a one-time send, when that ran). Null means
+  -- not sent yet.
+  welcome_email_sent_at timestamptz,
   created_at timestamptz not null default now()
 );
 

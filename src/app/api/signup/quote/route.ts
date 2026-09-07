@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { supabaseAdmin } from "@/lib/supabase";
-import { computeMonthlyBillingPlan, formatDate } from "@/lib/monthlyBilling";
+import { computeMonthlyBillingPlan } from "@/lib/monthlyBilling";
+import { formatDate } from "@/lib/easternTime";
 
 const bodySchema = z.object({
   locationId: z.string().uuid(),

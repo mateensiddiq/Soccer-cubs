@@ -4,6 +4,7 @@ import { getStripe } from "@/lib/stripe";
 import { supabaseAdmin } from "@/lib/supabase";
 import { sendOwnerNotification, sendParentEmail } from "@/lib/email";
 import { computeMonthlyBillingPlan } from "@/lib/monthlyBilling";
+import { buildWelcomeEmail } from "@/lib/emailTemplates";
 
 // Live and test mode each sign with their own secret, even though both send
 // to this same URL. STRIPE_WEBHOOK_SECRET_TEST is optional — set it to also
@@ -120,6 +121,16 @@ export async function POST(request: Request) {
             );
           } catch (err) {
             console.error("Failed to send parent confirmation email", err);
+          }
+
+          try {
+            const welcomeEmail = buildWelcomeEmail({
+              childName: enrollment.child_name,
+              locationName,
+            });
+            await sendParentEmail(enrollment.parent_email, welcomeEmail.subject, welcomeEmail.html);
+          } catch (err) {
+            console.error("Failed to send welcome email", err);
           }
 
           try {
