@@ -7,6 +7,16 @@ import {
   oneEasternDayBefore,
   todayEasternMidnight,
 } from "@/lib/classSchedule";
+import { easternMidnight } from "@/lib/easternTime";
+
+// One-time manual override: send Harmony's Session 1 welcome emails
+// starting Sept 13, 2026 instead of the normally-computed day-before date
+// (Sept 15), per Coach Mateen's request. Scoped to this specific session
+// only — remove once Session 1 is fully sent; future Harmony sessions
+// should go back to the normal computed date.
+const SEND_DATE_OVERRIDES: Record<string, number> = {
+  "d5c68ada-d22d-48d7-9019-aebfd9fbb12b": easternMidnight(2026, 9, 13), // Harmony Session 1
+};
 
 // Runs daily (see vercel.json). For every active enrollment that hasn't
 // gotten its welcome email yet, works out when the child's first class
@@ -69,6 +79,7 @@ export async function GET(request: Request) {
     }
 
     let sessionStartDate: string | null = row.sessions?.start_date ?? null;
+    let resolvedSessionId: string | null = row.session_id;
 
     // Full-year session-based signups have no single session_id — use
     // whichever session is current or next up at that location.
@@ -76,13 +87,14 @@ export async function GET(request: Request) {
       const todayIso = new Date(today * 1000).toISOString().slice(0, 10);
       const { data: upcomingSession } = await db
         .from("sessions")
-        .select("start_date")
+        .select("id, start_date")
         .eq("location_id", row.location_id)
         .gte("end_date", todayIso)
         .order("start_date", { ascending: true })
         .limit(1)
         .maybeSingle();
       sessionStartDate = upcomingSession?.start_date ?? null;
+      resolvedSessionId = upcomingSession?.id ?? null;
     }
 
     const earliestAttendance = computeEarliestAttendanceDate({
@@ -97,7 +109,9 @@ export async function GET(request: Request) {
       continue;
     }
 
-    const sendOn = oneEasternDayBefore(firstClassDate);
+    const sendOn = resolvedSessionId && SEND_DATE_OVERRIDES[resolvedSessionId] !== undefined
+      ? SEND_DATE_OVERRIDES[resolvedSessionId]
+      : oneEasternDayBefore(firstClassDate);
     if (sendOn > today) {
       // Not time yet.
       continue;
