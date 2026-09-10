@@ -2,7 +2,7 @@
 
 import { useActionState } from "react";
 import { submitBirthdayInquiry, type InquiryFormState } from "@/app/actions/inquiries";
-import { TextField, TextareaField } from "./FormField";
+import { TextField, TextareaField, Honeypot } from "./FormField";
 import { Button } from "./Button";
 
 const initialState: InquiryFormState = { status: "idle" };
@@ -26,6 +26,7 @@ export default function BirthdayForm() {
 
   return (
     <form action={formAction} className="space-y-4">
+      <Honeypot />
       <TextField id="name" name="name" label="Your name" required />
       <TextField id="email" name="email" type="email" label="Email" required />
       <TextField id="phone" name="phone" type="tel" label="Phone (optional)" />

@@ -35,3 +35,22 @@ export function SelectField({ label, id, className = "", children, ...props }: S
     </label>
   );
 }
+
+// Invisible spam trap: real visitors never see or reach this field (it's
+// positioned off-screen, not display:none, and skipped from tab order and
+// screen readers), but simple bots that blindly fill every input will
+// trip it. The matching server action checks it and silently drops the
+// submission. Keep the field `name` as "website" — a name bots commonly
+// look for and fill on their own.
+export function Honeypot() {
+  return (
+    <input
+      type="text"
+      name="website"
+      tabIndex={-1}
+      autoComplete="off"
+      aria-hidden="true"
+      style={{ position: "absolute", left: "-9999px", top: "-9999px" }}
+    />
+  );
+}

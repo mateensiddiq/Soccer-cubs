@@ -10,10 +10,25 @@ export type InquiryFormState = {
   message?: string;
 };
 
+// Real visitors never see or fill this field (it's positioned off-screen);
+// a bot that blindly fills every input will trip it. Pretend success
+// without touching the database or sending an email.
+function isHoneypotTripped(formData: FormData): boolean {
+  const value = formData.get("website");
+  return typeof value === "string" && value.trim() !== "";
+}
+
+const HONEYPOT_SUCCESS: InquiryFormState = {
+  status: "success",
+  message: "Thanks for reaching out! We'll get back to you soon.",
+};
+
 export async function submitContactInquiry(
   _prevState: InquiryFormState,
   formData: FormData
 ): Promise<InquiryFormState> {
+  if (isHoneypotTripped(formData)) return HONEYPOT_SUCCESS;
+
   const parsed = contactSchema.safeParse({
     name: formData.get("name"),
     email: formData.get("email"),
@@ -41,6 +56,10 @@ export async function submitBirthdayInquiry(
   _prevState: InquiryFormState,
   formData: FormData
 ): Promise<InquiryFormState> {
+  if (isHoneypotTripped(formData)) {
+    return { ...HONEYPOT_SUCCESS, message: "Thanks! We'll follow up about your birthday/event soon." };
+  }
+
   const parsed = birthdaySchema.safeParse({
     name: formData.get("name"),
     email: formData.get("email"),
