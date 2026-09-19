@@ -151,15 +151,15 @@ export default function Home() {
       {/* Who it's for */}
       <section className="py-20 sm:py-28">
         <Container className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <div className="reveal relative">
+          <div className="reveal relative mx-auto w-full max-w-md lg:max-w-[26rem] lg:mx-0">
             <div className="overflow-hidden rounded-[2rem] shadow-lift border-4 border-white">
               <Image
-                src="/images/photos/class-action-1.jpg"
-                alt="Kids practicing dribbling with soccer balls in a daycare gym"
-                width={2000}
-                height={1125}
-                sizes="(min-width: 1024px) 560px, 92vw"
-                className="aspect-[4/3] w-full object-cover"
+                src="/images/photos/class-action-3.jpg"
+                alt="Cubs in matching orange shirts kicking soccer balls across a daycare hall during class"
+                width={1400}
+                height={1750}
+                sizes="(min-width: 1024px) 416px, 92vw"
+                className="h-auto w-full"
               />
             </div>
           </div>

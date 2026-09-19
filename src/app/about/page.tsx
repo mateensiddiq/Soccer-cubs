@@ -23,20 +23,20 @@ export default function AboutPage() {
       <PageHero title="Meet your cub's coach" />
 
       <section className="py-16 sm:py-24">
-        <Container className="grid lg:grid-cols-[0.85fr_1.15fr] gap-12 lg:gap-20 items-start">
-          <div className="reveal lg:sticky lg:top-28 max-w-md mx-auto lg:mx-0 w-full">
-            <div className="overflow-hidden rounded-[2rem] border-4 border-white shadow-lift">
+        <Container className="grid lg:grid-cols-[13rem_1fr] gap-10 lg:gap-16 items-start">
+          <div className="reveal lg:sticky lg:top-28 mx-auto lg:mx-0 w-52 lg:w-full">
+            <div className="overflow-hidden rounded-3xl border-4 border-white shadow-soft">
               <Image
                 src="/images/brand/coach-mateen.jpg"
                 alt="Coach Mateen"
                 width={878}
                 height={878}
-                sizes="(min-width: 1024px) 420px, 90vw"
+                sizes="208px"
                 className="h-auto w-full"
                 preload
               />
             </div>
-            <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-3">
+            <ul className="mt-6 grid gap-3">
               {AT_A_GLANCE.map(({ label, icon: Icon }) => (
                 <li key={label} className="flex items-center gap-2.5 text-sm font-bold text-brown">
                   <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-green-soft text-green-deep">
