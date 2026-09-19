@@ -91,7 +91,7 @@ export default function ProgramPage() {
             </p>
             <div className="mt-8 overflow-hidden rounded-[2rem] border-4 border-white shadow-lift">
               <Image
-                src="/images/photos/class-action-2.jpg"
+                src="/images/photos/class-action-5.jpg"
                 alt="Cubs dribbling soccer balls across the floor during a Soccer Cubs class"
                 width={1619}
                 height={971}
