@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Container from "@/components/Container";
 import PageHero from "@/components/PageHero";
 import { ButtonLink } from "@/components/Button";
-import { PawPrint } from "@/components/illustrations";
+import { ArrowRight, CalendarBlank, MapPin } from "@phosphor-icons/react/dist/ssr";
 import { getPublicLocations } from "@/lib/locations";
 
 export const metadata: Metadata = {
@@ -21,12 +21,11 @@ export default async function SignupPage() {
   return (
     <div>
       <PageHero
-        eyebrow="SIGN UP"
         title="Let's get your cub on the team"
         subtitle="Registration is open year-round — pick your daycare below to see class times and get started."
       />
 
-      <section className="py-14">
+      <section className="py-14 sm:py-20">
         <Container>
           {locations.length === 0 ? (
             <div className="max-w-lg mx-auto text-center bg-white rounded-3xl p-10 border-2 border-dashed border-brown/15">
@@ -43,31 +42,33 @@ export default async function SignupPage() {
               {locations.map((location) => (
                 <div
                   key={location.id}
-                  className="bg-white rounded-3xl p-6 border-2 border-brown/10 shadow-sm flex flex-col"
+                  className="reveal group flex flex-col rounded-3xl bg-white border border-brown/10 p-7 shadow-soft transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:shadow-lift"
                 >
-                  <PawPrint className="h-8 w-8 text-orange" />
-                  <h3 className="mt-3 font-heading font-bold text-lg text-brown">
+                  <h3 className="font-heading font-extrabold text-2xl text-brown leading-tight">
                     {location.name}
                   </h3>
                   {location.address && (
-                    <p className="mt-1 text-sm text-brown-soft">{location.address}</p>
-                  )}
-                  {location.class_day ? (
-                    <p className="mt-1 text-sm font-semibold text-orange">
-                      Classes: {location.class_day}
-                    </p>
-                  ) : (
-                    <p className="mt-1 text-sm font-semibold text-brown-soft">
-                      Schedule: Coming soon
+                    <p className="mt-3 flex items-start gap-2 text-brown-soft">
+                      <MapPin size={20} weight="duotone" className="mt-0.5 shrink-0 text-action" aria-hidden="true" />
+                      {location.address}
                     </p>
                   )}
-                  <div className="mt-4 pt-4 border-t border-brown/10">
+                  <p
+                    className={`mt-2 flex items-center gap-2 font-bold ${
+                      location.class_day ? "text-brown" : "text-brown-soft"
+                    }`}
+                  >
+                    <CalendarBlank size={20} weight="duotone" className="shrink-0 text-action" aria-hidden="true" />
+                    {location.class_day ? `Classes: ${location.class_day}` : "Schedule: Coming soon"}
+                  </p>
+                  <div className="mt-auto pt-7">
                     <ButtonLink
                       href={`/signup/${location.id}`}
                       variant="outline"
-                      className="!text-sm !py-2 !px-4 w-full"
+                      className="w-full group-hover:border-action group-hover:text-action"
                     >
                       Sign Up Here
+                      <ArrowRight size={18} weight="bold" aria-hidden="true" />
                     </ButtonLink>
                   </div>
                 </div>
@@ -75,18 +76,18 @@ export default async function SignupPage() {
             </div>
           )}
 
-          <div className="mt-14 bg-green-soft rounded-[2.5rem] p-8 sm:p-10 text-center border-2 border-brown/10">
-            <p className="font-heading font-bold text-xl text-brown">
-              Want Soccer Cubs at your daycare?
-            </p>
-            <p className="mt-2 text-brown-soft text-sm max-w-md mx-auto">
-              We&apos;d love to chat about bringing the program on-site.
-            </p>
-            <div className="mt-5">
-              <ButtonLink href="/contact" variant="primary">
-                Get In Touch
-              </ButtonLink>
+          <div className="reveal mt-16 flex flex-col sm:flex-row items-center justify-between gap-6 rounded-[2rem] bg-green-soft px-8 py-9 sm:px-12 ring-1 ring-green/30">
+            <div className="text-center sm:text-left">
+              <p className="font-heading font-extrabold text-2xl text-brown">
+                Want Soccer Cubs at your daycare?
+              </p>
+              <p className="mt-1.5 text-brown-soft">
+                We&apos;d love to chat about bringing the program on-site.
+              </p>
             </div>
+            <ButtonLink href="/contact" variant="primary" className="shrink-0">
+              Get In Touch
+            </ButtonLink>
           </div>
         </Container>
       </section>

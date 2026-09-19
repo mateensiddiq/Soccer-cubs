@@ -22,7 +22,6 @@ export default async function BillingPage({
   return (
     <div>
       <PageHero
-        eyebrow="MANAGE SUBSCRIPTION"
         title="Manage my subscription"
         subtitle="Enter the email you used to sign up and we'll email you a secure link to update your payment method or cancel — no password needed."
       />

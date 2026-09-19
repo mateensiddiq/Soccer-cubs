@@ -89,7 +89,7 @@ export default function ManageSubscriptionPanel({
 
   if (memberships.length === 0) {
     return (
-      <div className="bg-white rounded-3xl border-2 border-brown/10 p-8 text-center">
+      <div className="bg-white rounded-3xl border border-brown/10 shadow-soft p-8 text-center">
         <p className="font-heading font-bold text-brown">No active memberships found.</p>
         <p className="mt-2 text-sm text-brown-soft">
           If you think this is a mistake, please contact us.
@@ -103,7 +103,7 @@ export default function ManageSubscriptionPanel({
       {memberships.map((m) => (
         <div
           key={m.subscriptionId}
-          className="bg-white rounded-3xl border-2 border-brown/10 p-6"
+          className="bg-white rounded-3xl border border-brown/10 shadow-soft p-6"
         >
           <p className="font-heading font-bold text-lg text-brown">{m.childName}</p>
           <p className="text-sm text-brown-soft">{m.locationName}</p>

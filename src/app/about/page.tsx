@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { Medal, ShieldCheck, SoccerBall, CalendarCheck } from "@phosphor-icons/react/dist/ssr";
 import Container from "@/components/Container";
 import PageHero from "@/components/PageHero";
 
@@ -9,53 +10,71 @@ export const metadata: Metadata = {
     "Meet the coach behind Soccer Cubs and why the program brings soccer straight to daycares in Northern Virginia.",
 };
 
+const AT_A_GLANCE = [
+  { label: "Former semi-professional player", icon: SoccerBall },
+  { label: "Coaching kids since 2019", icon: CalendarCheck },
+  { label: "USSF D-licensed", icon: Medal },
+  { label: "SafeSport certified", icon: ShieldCheck },
+];
+
 export default function AboutPage() {
   return (
     <div>
-      <PageHero eyebrow="ABOUT" title="Meet your cub's coach" />
+      <PageHero title="Meet your cub's coach" />
 
-      <section className="py-16">
-        <Container className="max-w-3xl">
-          <div className="grid sm:grid-cols-[200px_1fr] gap-8 items-start">
-            <div>
-              <div className="mx-auto sm:mx-0 h-48 w-48 rounded-full border-4 border-white shadow-md overflow-hidden">
-                <Image
-                  src="/images/brand/coach-mateen.jpg"
-                  alt="Coach Mateen"
-                  width={192}
-                  height={192}
-                  className="h-full w-full object-cover"
-                />
-              </div>
+      <section className="py-16 sm:py-24">
+        <Container className="grid lg:grid-cols-[0.85fr_1.15fr] gap-12 lg:gap-20 items-start">
+          <div className="reveal lg:sticky lg:top-28 max-w-md mx-auto lg:mx-0 w-full">
+            <div className="overflow-hidden rounded-[2rem] border-4 border-white shadow-lift">
+              <Image
+                src="/images/brand/coach-mateen.jpg"
+                alt="Coach Mateen"
+                width={878}
+                height={878}
+                sizes="(min-width: 1024px) 420px, 90vw"
+                className="h-auto w-full"
+                preload
+              />
             </div>
-            <div>
-              <h2 className="font-heading font-extrabold text-2xl text-brown">
-                Hi, I&apos;m Coach Mateen 👋
-              </h2>
-              <p className="mt-4 text-brown-soft">
-                I&apos;m Mateen Siddiq, a former semi-professional soccer
-                player. I&apos;ve been coaching at Sugarland Learning Academy
-                since 2019, working with kids as young as 2 (and as old as
-                14) &mdash; and that&apos;s exactly where the idea for Soccer
-                Cubs was born, years before it ever had a name.
-              </p>
-              <p className="mt-4 text-brown-soft">
-                I&apos;m USSF D-licensed and SafeSport certified, because the
-                families who trust me with their cubs deserve a coach who
-                takes that seriously.
-              </p>
-              <p className="mt-4 text-brown-soft">
-                What I love most is introducing this next generation of
-                athletes to soccer in a way that sticks &mdash; building real
-                motor skills and teamwork, while making sure every cub grows
-                up with a genuinely great relationship with the game.
-              </p>
-              <p className="mt-4 text-brown-soft">
-                Soccer Cubs is the result of years of doing this work before
-                it ever became a business &mdash; built from real experience
-                on the field, not a business plan.
-              </p>
-            </div>
+            <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-3">
+              {AT_A_GLANCE.map(({ label, icon: Icon }) => (
+                <li key={label} className="flex items-center gap-2.5 text-sm font-bold text-brown">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-green-soft text-green-deep">
+                    <Icon size={20} weight="duotone" aria-hidden="true" />
+                  </span>
+                  {label}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="reveal max-w-[65ch]">
+            <h2 className="font-heading font-extrabold text-4xl sm:text-5xl text-brown leading-[1.05]">
+              Hi, I&apos;m Coach Mateen
+            </h2>
+            <p className="mt-6 text-lg text-brown-soft leading-relaxed">
+              I&apos;m Mateen Siddiq, a former semi-professional soccer
+              player. I&apos;ve been coaching at Sugarland Learning Academy
+              since 2019, working with kids as young as 2 (and as old as
+              14) &mdash; and that&apos;s exactly where the idea for Soccer
+              Cubs was born, years before it ever had a name.
+            </p>
+            <p className="mt-5 text-lg text-brown-soft leading-relaxed">
+              I&apos;m USSF D-licensed and SafeSport certified, because the
+              families who trust me with their cubs deserve a coach who
+              takes that seriously.
+            </p>
+            <p className="mt-5 text-lg text-brown-soft leading-relaxed">
+              What I love most is introducing this next generation of
+              athletes to soccer in a way that sticks &mdash; building real
+              motor skills and teamwork, while making sure every cub grows
+              up with a genuinely great relationship with the game.
+            </p>
+            <p className="mt-5 text-lg text-brown-soft leading-relaxed">
+              Soccer Cubs is the result of years of doing this work before
+              it ever became a business &mdash; built from real experience
+              on the field, not a business plan.
+            </p>
           </div>
         </Container>
       </section>

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
+import { Confetti, Package, SoccerBall } from "@phosphor-icons/react/dist/ssr";
 import Container from "@/components/Container";
 import PageHero from "@/components/PageHero";
 import BirthdayForm from "@/components/BirthdayForm";
-import { SoccerBall, SunBurst, PawPrint } from "@/components/illustrations";
 
 export const metadata: Metadata = {
   title: "Birthdays & Events | Soccer Cubs",
@@ -19,12 +19,12 @@ const HIGHLIGHTS = [
   {
     title: "We bring the gear",
     body: "Soft training balls, cones, and everything needed — you just pick the spot.",
-    icon: SunBurst,
+    icon: Package,
   },
   {
     title: "Flexible & fun",
     body: "Tell us about your event and we'll tailor the games to the group and space.",
-    icon: PawPrint,
+    icon: Confetti,
   },
 ];
 
@@ -32,31 +32,29 @@ export default function BirthdaysPage() {
   return (
     <div>
       <PageHero
-        eyebrow="BIRTHDAYS & EVENTS"
         title="Let's celebrate with soccer!"
         subtitle="Soccer Cubs isn't just for daycares — we love bringing playful soccer games to birthday parties and special events too."
       />
 
-      <section className="py-14">
+      <section className="py-14 sm:py-20">
         <Container>
-          <div className="grid sm:grid-cols-3 gap-6 mb-14">
+          <ul className="reveal grid sm:grid-cols-3 gap-10 sm:gap-0 sm:divide-x divide-brown/10 mb-16">
             {HIGHLIGHTS.map(({ title, body, icon: Icon }) => (
-              <div
-                key={title}
-                className="bg-white rounded-3xl p-6 border-2 border-brown/10 shadow-sm text-center"
-              >
-                <Icon className="h-10 w-10 mx-auto" />
-                <h3 className="mt-3 font-heading font-bold text-brown">{title}</h3>
-                <p className="mt-1 text-sm text-brown-soft">{body}</p>
-              </div>
+              <li key={title} className="sm:px-8 first:sm:pl-0 last:sm:pr-0 text-center sm:text-left">
+                <span className="mx-auto sm:mx-0 flex h-12 w-12 items-center justify-center rounded-2xl bg-yellow-soft text-action">
+                  <Icon size={28} weight="duotone" aria-hidden="true" />
+                </span>
+                <h3 className="mt-4 font-heading font-bold text-xl text-brown">{title}</h3>
+                <p className="mt-2 text-brown-soft leading-relaxed">{body}</p>
+              </li>
             ))}
-          </div>
+          </ul>
 
           <div className="max-w-xl mx-auto">
-            <h2 className="font-heading font-extrabold text-2xl text-brown text-center mb-2">
+            <h2 className="font-heading font-extrabold text-3xl text-brown text-center mb-3">
               Tell us about your event
             </h2>
-            <p className="text-brown-soft text-center text-sm mb-6">
+            <p className="text-brown-soft text-center mb-8">
               This is just an inquiry — no payment required here. We&apos;ll
               follow up to talk through details and pricing.
             </p>

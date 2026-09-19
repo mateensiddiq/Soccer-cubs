@@ -2,14 +2,20 @@
 
 :root {
   --color-cream: #fff8e9;
-  --color-cream-dark: #fbedc9;
+  --color-cream-dark: #f9ebc8;
   --color-yellow: #fad232;
   --color-yellow-soft: #ffe9a8;
   --color-orange: #e8720a;
-  --color-orange-dark: #c25b00;
+  --color-orange-dark: #b45309;
+  /* Button fills and small text links need real contrast on cream and white;
+     the bright orange above is for large display accents only. */
+  --color-action: #b85400;
+  --color-action-deep: #96430a;
   --color-brown: #33200f;
   --color-brown-soft: #6b4a2f;
-  --color-green: #8fc694;
+  --color-brown-deep: #241509;
+  --color-green: #6fae76;
+  --color-green-deep: #2f6a3b;
   --color-green-soft: #e3f2e1;
   --color-pink: #ffc2ce;
 }
@@ -21,20 +27,36 @@
   --color-yellow-soft: var(--color-yellow-soft);
   --color-orange: var(--color-orange);
   --color-orange-dark: var(--color-orange-dark);
+  --color-action: var(--color-action);
+  --color-action-deep: var(--color-action-deep);
   --color-brown: var(--color-brown);
   --color-brown-soft: var(--color-brown-soft);
+  --color-brown-deep: var(--color-brown-deep);
   --color-green: var(--color-green);
+  --color-green-deep: var(--color-green-deep);
   --color-green-soft: var(--color-green-soft);
   --color-pink: var(--color-pink);
 
   --font-heading: var(--font-baloo);
   --font-sans: var(--font-nunito);
+
+  /* Depth is warm-tinted, never pure black. */
+  --shadow-soft: 0 1px 2px rgb(51 32 15 / 0.06), 0 10px 28px -12px rgb(51 32 15 / 0.16);
+  --shadow-lift: 0 2px 4px rgb(51 32 15 / 0.06), 0 22px 44px -18px rgb(51 32 15 / 0.28);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+  scrollbar-color: var(--color-orange) var(--color-cream-dark);
 }
 
 body {
   background: var(--color-cream);
   color: var(--color-brown);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
 }
 
 h1,
@@ -42,4 +64,79 @@ h2,
 h3,
 h4 {
   font-family: var(--font-heading), var(--font-sans), sans-serif;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+p,
+li {
+  text-wrap: pretty;
+}
+
+::selection {
+  background: var(--color-yellow);
+  color: var(--color-brown);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-action);
+  outline-offset: 3px;
+  border-radius: 0.5rem;
+}
+
+input,
+textarea,
+select {
+  accent-color: var(--color-action);
+  caret-color: var(--color-action);
+}
+
+/* ------------------------------------------------------------------ */
+/* Motion: one authored load moment for the hero, quiet reveals after. */
+/* ------------------------------------------------------------------ */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--d, 0s);
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Scroll-driven where supported; everywhere else content just shows. */
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: reveal-in linear both;
+    animation-timeline: view();
+    animation-range: entry 4% entry 38%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .rise,
+  .reveal {
+    animation: none !important;
+  }
 }

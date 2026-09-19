@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { TextField } from "./FormField";
+import { EnvelopeSimple } from "@phosphor-icons/react";
 import { Button } from "./Button";
 
 export default function BillingRequestForm() {
@@ -31,9 +32,9 @@ export default function BillingRequestForm() {
 
   if (status === "done" && message) {
     return (
-      <div className="rounded-3xl bg-green-soft border-2 border-brown/10 p-8 text-center">
-        <p className="text-4xl">📬</p>
-        <p className="mt-2 font-heading font-bold text-lg text-brown">{message}</p>
+      <div className="rounded-3xl bg-green-soft ring-1 ring-green/30 p-10 text-center" role="status">
+        <EnvelopeSimple size={44} weight="duotone" className="mx-auto text-green-deep" aria-hidden="true" />
+        <p className="mt-3 font-heading font-bold text-lg text-brown">{message}</p>
       </div>
     );
   }

@@ -166,7 +166,7 @@ export default function SchoolSignupForm({
     (!needsGroupPicker || classGroupId);
 
   return (
-    <div className="bg-white rounded-[2rem] border-2 border-brown/10 shadow-sm p-6 sm:p-10">
+    <div className="bg-white rounded-[2rem] border border-brown/10 shadow-soft p-6 sm:p-10">
       <StepIndicator step={step} includeSession={isSessionBased} />
 
       {step === "session" && (
@@ -186,10 +186,10 @@ export default function SchoolSignupForm({
                   key={s.id}
                   type="button"
                   onClick={() => setSessionSelection({ sessionId: s.id })}
-                  className={`w-full text-left rounded-2xl border-2 px-4 py-3 transition-colors ${
+                  className={`w-full text-left rounded-2xl border-2 px-4 py-3.5 transition-[border-color,background-color,box-shadow] duration-200 ${
                     selected
-                      ? "border-orange bg-yellow-soft"
-                      : "border-brown/10 hover:border-orange/40"
+                      ? "border-action bg-yellow-soft shadow-soft"
+                      : "border-brown/25 hover:border-action/60"
                   }`}
                 >
                   <p className="font-heading font-bold text-brown">{s.name}</p>
@@ -204,10 +204,10 @@ export default function SchoolSignupForm({
               <button
                 type="button"
                 onClick={() => setSessionSelection({ fullYear: true })}
-                className={`w-full text-left rounded-2xl border-2 px-4 py-3 transition-colors ${
+                className={`w-full text-left rounded-2xl border-2 px-4 py-3.5 transition-[border-color,background-color,box-shadow] duration-200 ${
                   sessionSelection && "fullYear" in sessionSelection
-                    ? "border-orange bg-yellow-soft"
-                    : "border-brown/10 hover:border-orange/40"
+                    ? "border-action bg-yellow-soft shadow-soft"
+                    : "border-brown/25 hover:border-action/60"
                 }`}
               >
                 <p className="font-heading font-bold text-brown">Full Year</p>
@@ -301,10 +301,10 @@ export default function SchoolSignupForm({
                     key={g.id}
                     type="button"
                     onClick={() => setClassGroupId(g.id)}
-                    className={`w-full text-left rounded-2xl border-2 px-4 py-3 transition-colors ${
+                    className={`w-full text-left rounded-2xl border-2 px-4 py-3.5 transition-[border-color,background-color,box-shadow] duration-200 ${
                       classGroupId === g.id
-                        ? "border-orange bg-yellow-soft"
-                        : "border-brown/10 hover:border-orange/40"
+                        ? "border-action bg-yellow-soft shadow-soft"
+                        : "border-brown/25 hover:border-action/60"
                     }`}
                   >
                     <p className="font-heading font-bold text-brown">{g.label}</p>
@@ -460,7 +460,7 @@ export default function SchoolSignupForm({
             )}
           </div>
 
-          <div className="rounded-2xl border-2 border-brown/10 p-5 text-sm space-y-1.5">
+          <div className="rounded-2xl border border-brown/20 bg-cream p-5 text-sm space-y-1.5">
             <p>
               <span className="font-semibold">Child:</span> {info.childName} (DOB{" "}
               {info.childDob})
@@ -511,7 +511,7 @@ function StepIndicator({ step, includeSession }: { step: Step; includeSession: b
             <div
               className={`h-8 w-8 rounded-full flex items-center justify-center font-heading font-bold text-sm border-2 ${
                 i <= currentIndex
-                  ? "bg-orange text-white border-orange"
+                  ? "bg-action text-white border-action"
                   : "bg-white text-brown-soft border-brown/15"
               }`}
             >

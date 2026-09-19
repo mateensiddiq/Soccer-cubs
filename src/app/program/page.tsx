@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { Check, HandHeart, UsersThree } from "@phosphor-icons/react/dist/ssr";
 import Container from "@/components/Container";
 import PageHero from "@/components/PageHero";
-import { PawPrint, SoccerBall, SunBurst } from "@/components/illustrations";
 
 export const metadata: Metadata = {
   title: "Our Program | Soccer Cubs",
@@ -42,31 +42,34 @@ export default function ProgramPage() {
   return (
     <div>
       <PageHero
-        eyebrow="THE PROGRAM"
         title="What a Soccer Cubs class looks like"
         subtitle="Every class is built around one big idea: little kids learn best when they're having fun. No drills, no pressure — just movement, games, and giggles."
       />
 
-      <section className="py-16">
-        <Container className="grid sm:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          <div className="bg-white rounded-3xl p-6 border-2 border-brown/10 shadow-sm">
-            <SoccerBall className="h-10 w-10" />
-            <h2 className="mt-3 font-heading font-bold text-xl text-brown">
+      <section className="py-16 sm:py-24">
+        <Container className="grid md:grid-cols-2 gap-10 md:gap-0 md:divide-x divide-brown/10 max-w-5xl">
+          <div className="reveal md:pr-14">
+            <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-yellow-soft text-action">
+              <UsersThree size={28} weight="duotone" aria-hidden="true" />
+            </span>
+            <h2 className="mt-5 font-heading font-extrabold text-2xl text-brown">
               How we group cubs
             </h2>
-            <p className="mt-2 text-sm text-brown-soft">
+            <p className="mt-3 text-brown-soft leading-relaxed">
               Classes are generally grouped by age &mdash; 2 and 3-year-olds
               together, 4 and 5-year-olds together &mdash; so activities
               match where each cub is developmentally. If skill levels are
               close, we&apos;re happy to mix ages too.
             </p>
           </div>
-          <div className="bg-white rounded-3xl p-6 border-2 border-brown/10 shadow-sm">
-            <PawPrint className="h-10 w-10 text-orange" />
-            <h2 className="mt-3 font-heading font-bold text-xl text-brown">
+          <div className="reveal md:pl-14">
+            <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-yellow-soft text-action">
+              <HandHeart size={28} weight="duotone" aria-hidden="true" />
+            </span>
+            <h2 className="mt-5 font-heading font-extrabold text-2xl text-brown">
               One coach, all year
             </h2>
-            <p className="mt-2 text-sm text-brown-soft">
+            <p className="mt-3 text-brown-soft leading-relaxed">
               Coach Mateen leads every single class himself &mdash; there&apos;s
               no rotating roster of instructors. Cubs get to grow comfortable
               with the same familiar face all year, instead of meeting
@@ -76,65 +79,71 @@ export default function ProgramPage() {
         </Container>
       </section>
 
-      <section className="py-16 border-t border-brown/10">
-        <Container>
-          <h2 className="font-heading font-extrabold text-3xl text-brown text-center">
-            A typical class
-          </h2>
-          <p className="mt-2 text-brown-soft text-center max-w-xl mx-auto">
-            Classes run for about 30 minutes, right at your daycare, using
-            soft training balls and gear sized for little feet.
-          </p>
-          <div className="mt-8 flex justify-center">
-            <div className="w-[28rem] sm:w-[36rem] max-w-full rounded-3xl overflow-hidden border-2 border-brown/10 shadow-sm">
+      <section className="pb-16 sm:pb-24">
+        <Container className="grid lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-20 items-start">
+          <div className="reveal lg:sticky lg:top-28">
+            <h2 className="font-heading font-extrabold text-4xl sm:text-5xl text-brown leading-[1.05]">
+              A typical class
+            </h2>
+            <p className="mt-4 text-lg text-brown-soft max-w-lg">
+              Classes run for about 30 minutes, right at your daycare, using
+              soft training balls and gear sized for little feet.
+            </p>
+            <div className="mt-8 overflow-hidden rounded-[2rem] border-4 border-white shadow-lift">
               <Image
-                src="/images/photos/class-action-2.jpg"
+                src="/images/photos/class-action-1.jpg"
                 alt="Kids dribbling soccer balls during a Soccer Cubs class"
-                width={600}
-                height={360}
-                className="w-full h-auto"
+                width={2000}
+                height={1125}
+                sizes="(min-width: 1024px) 600px, 92vw"
+                className="h-auto w-full"
               />
             </div>
           </div>
-          <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+          <ol className="reveal relative">
+            <div
+              aria-hidden="true"
+              className="absolute left-[1.6rem] top-8 bottom-8 w-px bg-orange/30"
+            />
             {CLASS_FLOW.map((item, i) => (
-              <div key={item.title} className="text-center px-2">
-                <div className="mx-auto h-12 w-12 rounded-full bg-yellow text-brown font-heading font-extrabold text-xl flex items-center justify-center border-2 border-brown/10 shadow-sm">
+              <li key={item.title} className="relative flex gap-5 pb-9 last:pb-0">
+                <div className="relative z-10 flex h-[3.25rem] w-[3.25rem] shrink-0 items-center justify-center rounded-full bg-yellow font-heading font-extrabold text-xl text-brown ring-8 ring-cream">
                   {i + 1}
                 </div>
-                <h3 className="mt-3 font-heading font-bold text-brown">
-                  {item.title}
-                </h3>
-                <p className="mt-1 text-sm text-brown-soft">{item.body}</p>
-              </div>
+                <div className="pt-1.5">
+                  <h3 className="font-heading font-bold text-xl text-brown">{item.title}</h3>
+                  <p className="mt-1.5 text-brown-soft leading-relaxed">{item.body}</p>
+                </div>
+              </li>
             ))}
-          </div>
+          </ol>
         </Container>
       </section>
 
-      <section className="py-16 border-t border-brown/10">
+      <section className="pb-24 sm:pb-32">
         <Container>
-          <div className="text-center max-w-2xl mx-auto">
-            <SunBurst className="h-14 w-14 mx-auto" />
-            <h2 className="mt-3 font-heading font-extrabold text-3xl text-brown">
-              Skills we build along the way
-            </h2>
-            <p className="mt-3 text-brown-soft">
-              Soccer is the fun part — but every class is quietly building
-              skills that help on and off the field.
-            </p>
+          <div className="reveal rounded-[2rem] bg-white border border-brown/10 shadow-soft px-6 py-12 sm:px-12 sm:py-16">
+            <div className="text-center max-w-2xl mx-auto">
+              <h2 className="font-heading font-extrabold text-3xl sm:text-4xl text-brown">
+                Skills we build along the way
+              </h2>
+              <p className="mt-4 text-lg text-brown-soft">
+                Soccer is the fun part — but every class is quietly building
+                skills that help on and off the field.
+              </p>
+            </div>
+            <ul className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4 max-w-4xl mx-auto">
+              {SKILLS.map((skill) => (
+                <li key={skill} className="flex items-center gap-3 font-bold text-brown">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-green-soft text-green-deep">
+                    <Check size={16} weight="bold" aria-hidden="true" />
+                  </span>
+                  {skill}
+                </li>
+              ))}
+            </ul>
           </div>
-          <ul className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-3xl mx-auto">
-            {SKILLS.map((skill) => (
-              <li
-                key={skill}
-                className="flex items-center gap-2 text-sm font-semibold text-brown bg-white rounded-2xl px-4 py-3 border-2 border-brown/10 shadow-sm"
-              >
-                <PawPrint className="h-5 w-5 text-orange shrink-0" />
-                {skill}
-              </li>
-            ))}
-          </ul>
         </Container>
       </section>
     </div>

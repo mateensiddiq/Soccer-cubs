@@ -70,7 +70,6 @@ export default async function ManageSubscriptionPage({
   return (
     <div>
       <PageHero
-        eyebrow="MANAGE SUBSCRIPTION"
         title="Manage my subscription"
         subtitle="Freeze your membership for a month or two, update your payment method, or cancel — all from here."
       />

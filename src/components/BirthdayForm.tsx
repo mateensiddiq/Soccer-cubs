@@ -3,6 +3,7 @@
 import { useActionState } from "react";
 import { submitBirthdayInquiry, type InquiryFormState } from "@/app/actions/inquiries";
 import { TextField, TextareaField, Honeypot } from "./FormField";
+import { CheckCircle } from "@phosphor-icons/react";
 import { Button } from "./Button";
 
 const initialState: InquiryFormState = { status: "idle" };
@@ -15,9 +16,9 @@ export default function BirthdayForm() {
 
   if (state.status === "success") {
     return (
-      <div className="rounded-3xl bg-green-soft border-2 border-brown/10 p-8 text-center">
-        <p className="text-4xl">🎉</p>
-        <p className="mt-2 font-heading font-bold text-xl text-brown">
+      <div className="rounded-3xl bg-green-soft ring-1 ring-green/30 p-10 text-center" role="status">
+        <CheckCircle size={44} weight="fill" className="mx-auto text-green-deep" aria-hidden="true" />
+        <p className="mt-3 font-heading font-bold text-xl text-brown">
           {state.message}
         </p>
       </div>

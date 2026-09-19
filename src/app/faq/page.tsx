@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Container from "@/components/Container";
 import PageHero from "@/components/PageHero";
 import { ButtonLink } from "@/components/Button";
+import { Plus } from "@phosphor-icons/react/dist/ssr";
 
 export const metadata: Metadata = {
   title: "FAQ | Soccer Cubs",
@@ -84,35 +85,31 @@ export default function FaqPage() {
   return (
     <div>
       <PageHero
-        eyebrow="FAQ"
         title="Frequently Asked Questions"
         subtitle="Everything parents usually ask before their cub's first class."
       />
 
-      <section className="py-16">
+      <section className="py-14 sm:py-20">
         <Container className="max-w-3xl">
-          <div className="space-y-10">
+          <div className="space-y-14">
             {FAQ_GROUPS.map((group) => (
               <div key={group.title}>
-                <h2 className="font-heading font-extrabold text-2xl text-brown mb-4">
+                <h2 className="font-heading font-extrabold text-3xl text-brown mb-5">
                   {group.title}
                 </h2>
-                <div className="space-y-3">
+                <div className="divide-y divide-brown/10 border-y border-brown/10">
                   {group.items.map((item) => (
-                    <details
-                      key={item.question}
-                      className="group bg-white rounded-2xl border-2 border-brown/10 open:border-orange/30 px-5 py-4"
-                    >
-                      <summary className="flex items-center justify-between gap-4 cursor-pointer list-none font-heading font-bold text-brown">
+                    <details key={item.question} className="group py-1">
+                      <summary className="flex items-center justify-between gap-4 cursor-pointer list-none py-4 font-heading font-bold text-lg text-brown transition-colors hover:text-action [&::-webkit-details-marker]:hidden">
                         {item.question}
                         <span
                           aria-hidden="true"
-                          className="shrink-0 h-7 w-7 rounded-full bg-cream-dark text-brown flex items-center justify-center text-lg leading-none transition-transform group-open:rotate-45"
+                          className="shrink-0 h-8 w-8 rounded-full bg-yellow-soft text-action flex items-center justify-center transition-transform duration-300 group-open:rotate-45"
                         >
-                          +
+                          <Plus size={16} weight="bold" />
                         </span>
                       </summary>
-                      <p className="mt-3 text-sm text-brown-soft leading-relaxed">
+                      <p className="pb-5 pr-12 text-brown-soft leading-relaxed">
                         {item.answer}
                       </p>
                     </details>
@@ -122,18 +119,18 @@ export default function FaqPage() {
             ))}
           </div>
 
-          <div className="mt-12 text-center bg-yellow-soft rounded-3xl p-8">
-            <h2 className="font-heading font-extrabold text-xl text-brown">
-              Still have questions?
-            </h2>
-            <p className="mt-2 text-sm text-brown-soft">
-              We&apos;re happy to help — reach out and we&apos;ll get back to you.
-            </p>
-            <div className="mt-5">
-              <ButtonLink href="/contact" variant="primary">
-                Contact Us
-              </ButtonLink>
+          <div className="mt-16 flex flex-col sm:flex-row items-center justify-between gap-6 rounded-[2rem] bg-yellow-soft px-8 py-9 sm:px-10">
+            <div className="text-center sm:text-left">
+              <h2 className="font-heading font-extrabold text-2xl text-brown">
+                Still have questions?
+              </h2>
+              <p className="mt-1.5 text-brown-soft">
+                We&apos;re happy to help — reach out and we&apos;ll get back to you.
+              </p>
             </div>
+            <ButtonLink href="/contact" variant="primary" className="shrink-0">
+              Contact Us
+            </ButtonLink>
           </div>
         </Container>
       </section>
