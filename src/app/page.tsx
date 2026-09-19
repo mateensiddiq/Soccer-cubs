@@ -103,26 +103,22 @@ export default function Home() {
           </div>
 
           <div
-            className="rise relative mx-auto w-full max-w-xl lg:max-w-none pb-10 sm:pb-6"
+            className="rise relative mx-auto flex justify-center"
             style={{ "--d": "0.15s" } as React.CSSProperties}
           >
-            <div className="relative overflow-hidden rounded-[2rem] border-4 border-white shadow-lift">
-              <Image
-                src="/images/photos/class-action-2.jpg"
-                alt="Cubs dribbling soccer balls across the floor during a Soccer Cubs class"
-                width={1619}
-                height={971}
-                sizes="(min-width: 1024px) 560px, 92vw"
-                className="aspect-[5/4] w-full object-cover object-[45%_50%]"
-                preload
-              />
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 flex items-center justify-center"
+            >
+              <div className="h-64 w-64 sm:h-96 sm:w-96 rounded-full bg-white/60 blur-2xl" />
             </div>
             <Image
               src="/images/brand/logo-full.png"
               alt="Soccer Cubs logo — a happy lion cub dribbling a soccer ball"
               width={480}
               height={480}
-              className="absolute -bottom-7 -right-1 sm:-right-5 w-36 sm:w-48 h-auto drop-shadow-[0_12px_16px_rgb(51_32_15/0.25)]"
+              className="relative w-64 sm:w-80 lg:w-[26rem] h-auto drop-shadow-[0_18px_22px_rgb(51_32_15/0.22)]"
+              preload
             />
           </div>
         </Container>
