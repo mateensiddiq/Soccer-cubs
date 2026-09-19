@@ -20,7 +20,7 @@ export default function Footer() {
   if (pathname.startsWith("/admin")) return null;
 
   return (
-    <footer className="bg-brown-deep text-cream">
+    <footer className="bg-orange text-brown-deep">
       <Container className="py-14 grid gap-10 sm:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <div className="flex items-center gap-2">
@@ -39,20 +39,20 @@ export default function Footer() {
               className="h-9 w-auto"
             />
           </div>
-          <p className="mt-4 text-sm text-cream/75 max-w-xs">
+          <p className="mt-4 text-sm text-brown-deep/90 max-w-xs">
             Playful, coach-led soccer classes for ages 2 and up, brought
             right to daycares across Northern Virginia.
           </p>
         </div>
 
         <div>
-          <p className="font-heading font-bold text-yellow mb-4">Explore</p>
+          <p className="font-heading font-extrabold text-brown-deep mb-4">Explore</p>
           <ul className="space-y-2.5 text-sm">
             {FOOTER_LINKS.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="text-cream/80 hover:text-yellow font-semibold transition-colors"
+                  className="text-brown-deep/90 hover:text-white font-bold transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -62,10 +62,10 @@ export default function Footer() {
         </div>
 
         <div>
-          <p className="font-heading font-bold text-yellow mb-4">
+          <p className="font-heading font-extrabold text-brown-deep mb-4">
             Ready to join in?
           </p>
-          <p className="text-sm text-cream/75 mb-4">
+          <p className="text-sm text-brown-deep/90 mb-4">
             Sign up online in just a couple of minutes.
           </p>
           <ButtonLink href="/signup" variant="secondary" className="!py-2.5 !px-5">
@@ -74,14 +74,14 @@ export default function Footer() {
         </div>
       </Container>
 
-      <div className="border-t border-cream/10">
-        <Container className="py-5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-cream/65">
+      <div className="border-t border-brown-deep/20">
+        <Container className="py-5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-brown-deep/90">
           <p>&copy; {new Date().getFullYear()} Soccer Cubs. All rights reserved.</p>
           <div className="flex gap-5">
-            <Link href="/privacy" className="hover:text-yellow transition-colors">
+            <Link href="/privacy" className="font-semibold hover:text-white transition-colors">
               Privacy Policy
             </Link>
-            <Link href="/terms" className="hover:text-yellow transition-colors">
+            <Link href="/terms" className="font-semibold hover:text-white transition-colors">
               Terms
             </Link>
           </div>
