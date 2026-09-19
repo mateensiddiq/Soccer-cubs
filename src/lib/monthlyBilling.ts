@@ -68,7 +68,7 @@ export function computeMonthlyBillingPlan(
   if (day >= 25) {
     return {
       trialEnd: nextMonthUnix,
-      billingNote: `Free trial for the rest of this month — any classes your child attends this month are on us. Then $${fullPriceLabel}/mo starting ${nextMonthLabel}.`,
+      billingNote: `Free trial for the rest of this month. Any classes your child attends this month are on us. Then $${fullPriceLabel}/mo starting ${nextMonthLabel}.`,
     };
   }
 
@@ -77,7 +77,7 @@ export function computeMonthlyBillingPlan(
     return {
       trialEnd: nextMonthUnix,
       immediateChargeCents: discountedCents,
-      billingNote: `50% off your first month — pay $${formatMoney(discountedCents)} today for any classes this month, then $${fullPriceLabel}/mo starting ${nextMonthLabel}.`,
+      billingNote: `50% off your first month: pay $${formatMoney(discountedCents)} today for any classes this month, then $${fullPriceLabel}/mo starting ${nextMonthLabel}.`,
     };
   }
 

@@ -6,7 +6,7 @@ import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact | Soccer Cubs",
-  description: "Get in touch with Soccer Cubs — questions, partnerships, and more.",
+  description: "Get in touch with Soccer Cubs: questions, partnerships, and more.",
 };
 
 export default function ContactPage() {

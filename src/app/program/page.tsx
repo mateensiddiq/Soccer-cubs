@@ -17,7 +17,7 @@ const CLASS_FLOW = [
   },
   {
     title: "Learning the skill",
-    body: "Coach Mateen breaks down one skill at a time — dribbling through cones, passing with a partner, or a fun new trick — in simple steps every cub can follow.",
+    body: "Coach Mateen breaks down one skill at a time (dribbling through cones, passing with a partner, or a fun new trick) in simple steps every cub can follow.",
   },
   {
     title: "Mini-game",
@@ -43,7 +43,7 @@ export default function ProgramPage() {
     <div>
       <PageHero
         title="What a Soccer Cubs class looks like"
-        subtitle="Every class is built around one big idea: little kids learn best when they're having fun. No drills, no pressure — just movement, games, and giggles."
+        subtitle="Every class is built around one big idea: little kids learn best when they're having fun. No drills, no pressure, just movement, games, and giggles."
       />
 
       <section className="py-16 sm:py-24">
@@ -56,8 +56,8 @@ export default function ProgramPage() {
               How we group cubs
             </h2>
             <p className="mt-3 text-brown-soft leading-relaxed">
-              Classes are generally grouped by age &mdash; 2 and 3-year-olds
-              together, 4 and 5-year-olds together &mdash; so activities
+              Classes are generally grouped by age: 2 and 3-year-olds
+              together, 4 and 5-year-olds together, so activities
               match where each cub is developmentally. If skill levels are
               close, we&apos;re happy to mix ages too.
             </p>
@@ -70,7 +70,7 @@ export default function ProgramPage() {
               One coach, all year
             </h2>
             <p className="mt-3 text-brown-soft leading-relaxed">
-              Coach Mateen leads every single class himself &mdash; there&apos;s
+              Coach Mateen leads every single class himself. There&apos;s
               no rotating roster of instructors. Cubs get to grow comfortable
               with the same familiar face all year, instead of meeting
               someone new every few months.
@@ -129,7 +129,7 @@ export default function ProgramPage() {
                 Skills we build along the way
               </h2>
               <p className="mt-4 text-lg text-brown-soft">
-                Soccer is the fun part — but every class is quietly building
+                Soccer is the fun part, but every class is quietly building
                 skills that help on and off the field.
               </p>
             </div>

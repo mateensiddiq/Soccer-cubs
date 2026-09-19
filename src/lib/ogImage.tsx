@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 
 export const ogImageAlt =
-  "Soccer Cubs — on-site soccer classes for kids 2+ in Northern Virginia";
+  "Soccer Cubs: on-site soccer classes for kids 2+ in Northern Virginia";
 export const ogImageSize = { width: 1200, height: 630 };
 export const ogImageContentType = "image/png";
 

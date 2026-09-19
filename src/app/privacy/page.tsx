@@ -34,8 +34,8 @@ export default function PrivacyPage() {
                 When you sign up for classes, we collect your name, email,
                 phone number, and your child&apos;s name and date of birth,
                 along with any notes you choose to share (such as
-                allergies). Payment is processed securely by Stripe &mdash;
-                we do not store your card details ourselves. When you
+                allergies). Payment is processed securely by Stripe,
+                so we do not store your card details ourselves. When you
                 contact us or submit a birthday/event inquiry, we collect
                 whatever information you include in that form.
               </p>

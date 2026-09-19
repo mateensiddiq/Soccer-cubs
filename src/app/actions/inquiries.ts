@@ -103,12 +103,12 @@ async function saveInquiry(
 
     const label = type === "contact" ? "Contact form" : "Birthday/Event inquiry";
     await sendOwnerNotification(
-      `${label} — ${fields.name}`,
+      `${label}: ${fields.name}`,
       `
         <p><strong>Type:</strong> ${label}</p>
         <p><strong>Name:</strong> ${fields.name}</p>
         <p><strong>Email:</strong> ${fields.email}</p>
-        <p><strong>Phone:</strong> ${fields.phone ?? "—"}</p>
+        <p><strong>Phone:</strong> ${fields.phone ?? "Not provided"}</p>
         ${fields.event_date ? `<p><strong>Event date:</strong> ${fields.event_date}</p>` : ""}
         <p><strong>Message:</strong><br/>${fields.message.replace(/\n/g, "<br/>")}</p>
       `

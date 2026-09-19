@@ -22,7 +22,7 @@ export default async function SignupPage() {
     <div>
       <PageHero
         title="Let's get your cub on the team"
-        subtitle="Registration is open year-round — pick your daycare below to see class times and get started."
+        subtitle="Registration is open year-round. Pick your daycare below to see class times and get started."
       />
 
       <section className="py-14 sm:py-20">

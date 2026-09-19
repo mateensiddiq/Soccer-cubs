@@ -83,14 +83,14 @@ export default async function SchoolSignupPage({
                         </span>
                         <span className="text-brown">
                           <span className="font-bold">{g.label}</span>
-                          {detail && <span className="text-brown-soft"> — {detail}</span>}
+                          {detail && <span className="text-brown-soft">: {detail}</span>}
                         </span>
                       </li>
                     );
                   })
                 ) : (
                   <li className="text-brown-soft leading-relaxed">
-                    Schedule coming soon — sign up now and we&apos;ll follow up
+                    Schedule coming soon. Sign up now and we&apos;ll follow up
                     with your exact class time before your first class.
                   </li>
                 )}

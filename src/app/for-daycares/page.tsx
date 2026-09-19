@@ -8,7 +8,7 @@ import { ButtonLink } from "@/components/Button";
 export const metadata: Metadata = {
   title: "For Daycare Directors | Soccer Cubs",
   description:
-    "Bring Soccer Cubs to your daycare — a fun, on-site soccer program that teaches real skills, with zero hassle and zero cost to your school.",
+    "Bring Soccer Cubs to your daycare. A fun, on-site soccer program that teaches real skills, with zero hassle and zero cost to your school.",
 };
 
 const KID_BENEFITS = [
@@ -33,7 +33,7 @@ const DAYCARE_BENEFITS = [
   },
   {
     title: "One familiar face all year",
-    body: "Coach Mateen leads every session himself and handles all scheduling and communication personally — no rotating coaches or new faces.",
+    body: "Coach Mateen leads every session himself and handles all scheduling and communication personally, with no rotating coaches or new faces.",
   },
   {
     title: "We bring the gear",
@@ -46,7 +46,7 @@ export default function ForDaycaresPage() {
     <div>
       <PageHero
         title="Bring Soccer Cubs to your students"
-        subtitle="A fun, on-site soccer program that teaches real skills — with zero hassle for your school."
+        subtitle="A fun, on-site soccer program that teaches real skills, with zero hassle for your school."
       />
 
       <section className="py-16 sm:py-24">
@@ -56,8 +56,8 @@ export default function ForDaycaresPage() {
               We handle the coaching and the equipment
             </h2>
             <p className="mt-5 text-lg text-brown-soft leading-relaxed max-w-lg">
-              Parents sign up and pay directly online, at no cost to you
-              &mdash; just a joyful, active program your families will
+              Parents sign up and pay directly online, at no cost to you,
+              just a joyful, active program your families will
               love, with zero extra work for your staff.
             </p>
             <div className="mt-8">

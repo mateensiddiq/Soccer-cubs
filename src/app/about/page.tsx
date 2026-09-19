@@ -49,14 +49,14 @@ export default function AboutPage() {
           </div>
 
           <div className="reveal max-w-[65ch]">
-            <h2 className="font-heading font-extrabold text-4xl sm:text-5xl text-brown leading-[1.05]">
+            <h2 className="font-heading font-extrabold text-3xl sm:text-4xl text-brown leading-[1.1]">
               Hi, I&apos;m Coach Mateen
             </h2>
             <p className="mt-6 text-lg text-brown-soft leading-relaxed">
               I&apos;m Mateen Siddiq, a former semi-professional soccer
               player. I&apos;ve been coaching at Sugarland Learning Academy
               since 2019, working with kids as young as 2 (and as old as
-              14) &mdash; and that&apos;s exactly where the idea for Soccer
+              14), and that&apos;s exactly where the idea for Soccer
               Cubs was born, years before it ever had a name.
             </p>
             <p className="mt-5 text-lg text-brown-soft leading-relaxed">
@@ -66,13 +66,13 @@ export default function AboutPage() {
             </p>
             <p className="mt-5 text-lg text-brown-soft leading-relaxed">
               What I love most is introducing this next generation of
-              athletes to soccer in a way that sticks &mdash; building real
+              athletes to soccer in a way that sticks, building real
               motor skills and teamwork, while making sure every cub grows
               up with a genuinely great relationship with the game.
             </p>
             <p className="mt-5 text-lg text-brown-soft leading-relaxed">
               Soccer Cubs is the result of years of doing this work before
-              it ever became a business &mdash; built from real experience
+              it ever became a business, built from real experience
               on the field, not a business plan.
             </p>
           </div>

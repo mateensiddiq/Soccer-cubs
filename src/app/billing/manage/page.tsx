@@ -71,7 +71,7 @@ export default async function ManageSubscriptionPage({
     <div>
       <PageHero
         title="Manage my subscription"
-        subtitle="Freeze your membership for a month or two, update your payment method, or cancel — all from here."
+        subtitle="Freeze your membership for a month or two, update your payment method, or cancel, all from here."
       />
       <section className="py-14">
         <Container className="max-w-2xl">

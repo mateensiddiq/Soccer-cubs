@@ -7,7 +7,7 @@ import BirthdayForm from "@/components/BirthdayForm";
 export const metadata: Metadata = {
   title: "Birthdays & Events | Soccer Cubs",
   description:
-    "Book Soccer Cubs for a birthday party or special event — soccer games and activities for little ones.",
+    "Book Soccer Cubs for a birthday party or special event, with soccer games and activities for little ones.",
 };
 
 const HIGHLIGHTS = [
@@ -18,7 +18,7 @@ const HIGHLIGHTS = [
   },
   {
     title: "We bring the gear",
-    body: "Soft training balls, cones, and everything needed — you just pick the spot.",
+    body: "Soft training balls, cones, and everything needed. You just pick the spot.",
     icon: Package,
   },
   {
@@ -33,7 +33,7 @@ export default function BirthdaysPage() {
     <div>
       <PageHero
         title="Let's celebrate with soccer!"
-        subtitle="Soccer Cubs isn't just for daycares — we love bringing playful soccer games to birthday parties and special events too."
+        subtitle="Soccer Cubs isn't just for daycares. We love bringing playful soccer games to birthday parties and special events too."
       />
 
       <section className="py-14 sm:py-20">
@@ -55,7 +55,7 @@ export default function BirthdaysPage() {
               Tell us about your event
             </h2>
             <p className="text-brown-soft text-center mb-8">
-              This is just an inquiry — no payment required here. We&apos;ll
+              This is just an inquiry, with no payment required here. We&apos;ll
               follow up to talk through details and pricing.
             </p>
             <BirthdayForm />

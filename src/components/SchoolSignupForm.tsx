@@ -250,7 +250,7 @@ export default function SchoolSignupForm({
             />
             {ageWarning && (
               <p className="text-sm font-semibold text-orange-dark bg-yellow-soft rounded-xl px-3 py-2">
-                Just a heads up — Soccer Cubs is designed for ages 2 and up.
+                Just a heads up: Soccer Cubs is designed for ages 2 and up.
                 Reach out on our{" "}
                 <a href="/contact" className="underline">
                   contact page
@@ -319,7 +319,7 @@ export default function SchoolSignupForm({
 
           <TextareaField
             id="notes"
-            label="Anything we should know? (allergies, notes — optional)"
+            label="Anything we should know? (optional: allergies, notes)"
             value={info.notes}
             onChange={(e) => setInfo({ ...info, notes: e.target.value })}
           />

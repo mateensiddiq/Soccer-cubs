@@ -111,7 +111,7 @@ export default function ManageSubscriptionPanel({
           {m.isFrozen ? (
             <div className="mt-4 bg-yellow-soft rounded-2xl p-4">
               <p className="text-sm font-semibold text-brown">
-                Frozen — billing resumes {m.resumesAtLabel}.
+                Frozen: billing resumes {m.resumesAtLabel}.
               </p>
               <Button
                 variant="outline"

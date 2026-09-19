@@ -23,7 +23,7 @@ export default async function BillingPage({
     <div>
       <PageHero
         title="Manage my subscription"
-        subtitle="Enter the email you used to sign up and we'll email you a secure link to update your payment method or cancel — no password needed."
+        subtitle="Enter the email you used to sign up and we'll email you a secure link to update your payment method or cancel. No password needed."
       />
       <section className="py-14">
         <Container className="max-w-md">

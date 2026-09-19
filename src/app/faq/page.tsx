@@ -7,7 +7,7 @@ import { Plus } from "@phosphor-icons/react/dist/ssr";
 export const metadata: Metadata = {
   title: "FAQ | Soccer Cubs",
   description:
-    "Answers to common questions about Soccer Cubs classes, billing, and getting started — ages, weather policy, missed classes, cancellations, and more.",
+    "Answers to common questions about Soccer Cubs classes, billing, and getting started: ages, weather policy, missed classes, cancellations, and more.",
 };
 
 type FaqItem = { question: string; answer: string };
@@ -28,7 +28,7 @@ const FAQ_GROUPS: FaqGroup[] = [
           "Yes! Reach out through our Contact page with your daycare and your child's name, and we'll do our best to get your cub into the next class for a trial.",
       },
       {
-        question: "My daycare isn't a Soccer Cubs location yet — what can I do?",
+        question: "My daycare isn't a Soccer Cubs location yet. What can I do?",
         answer:
           "Refer us! Let us know your daycare's name and we'll reach out directly to the director to see if they'd like to bring Soccer Cubs on-site.",
       },
@@ -50,7 +50,7 @@ const FAQ_GROUPS: FaqGroup[] = [
       {
         question: "What if my child misses a class?",
         answer:
-          "Missed classes are the family's responsibility — Soccer Cubs isn't able to offer makeups for absences due to illness or vacation. The one exception is on us: if we're ever unable to make it to your school for a scheduled class, we'll offer a makeup class.",
+          "Missed classes are the family's responsibility. Soccer Cubs isn't able to offer makeups for absences due to illness or vacation. The one exception is on us: if we're ever unable to make it to your school for a scheduled class, we'll offer a makeup class.",
       },
     ],
   },
@@ -70,12 +70,12 @@ const FAQ_GROUPS: FaqGroup[] = [
       {
         question: "Can I pause my membership if we're traveling?",
         answer:
-          "Yes — head to the Manage My Subscription page (linked in the footer) and freeze your membership for 1 or 2 months. You won't be charged while frozen, and billing picks back up automatically once the freeze ends.",
+          "Yes! Head to the Manage My Subscription page (linked in the footer) and freeze your membership for 1 or 2 months. You won't be charged while frozen, and billing picks back up automatically once the freeze ends.",
       },
       {
         question: "How do I cancel my subscription?",
         answer:
-          "Head to the Manage My Subscription page (linked in the footer) and enter your email for a secure link to your account. Just be sure to cancel before your next monthly payment is charged — once that charge goes through, your cub is enrolled for that month and we're not able to cancel or refund it.",
+          "Head to the Manage My Subscription page (linked in the footer) and enter your email for a secure link to your account. Just be sure to cancel before your next monthly payment is charged. Once that charge goes through, your cub is enrolled for that month and we're not able to cancel or refund it.",
       },
     ],
   },
@@ -125,7 +125,7 @@ export default function FaqPage() {
                 Still have questions?
               </h2>
               <p className="mt-1.5 text-brown-soft">
-                We&apos;re happy to help — reach out and we&apos;ll get back to you.
+                We&apos;re happy to help. Reach out and we&apos;ll get back to you.
               </p>
             </div>
             <ButtonLink href="/contact" variant="primary" className="shrink-0">

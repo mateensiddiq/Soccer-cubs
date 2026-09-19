@@ -56,7 +56,7 @@ export async function POST(request: Request) {
       `${enrollment.parent_name} requested to manage their subscription`,
       `
         <p><strong>${enrollment.parent_name}</strong> (${parsed.data.email}) just requested a link to manage or cancel their subscription for <strong>${enrollment.child_name}</strong>.</p>
-        <p>They were emailed a secure link directly — no action needed unless they reach out to you.</p>
+        <p>They were emailed a secure link directly, so no action is needed unless they reach out to you.</p>
       `
     );
   } catch (err) {

@@ -24,7 +24,7 @@ const CREDENTIALS = [
 const WHO_ITS_FOR = [
   {
     title: "Right at daycare",
-    body: "No car seats, no rushing after work — we come to your child's daycare during the day.",
+    body: "No car seats, no rushing after work. We come to your child's daycare during the day.",
     icon: HouseLine,
   },
   {
@@ -34,7 +34,7 @@ const WHO_ITS_FOR = [
   },
   {
     title: "Same Coach, Every Class",
-    body: "Coach Mateen leads every session himself and talks with parents directly — building real safety and familiarity for cubs and families alike, not a new face every few months.",
+    body: "Coach Mateen leads every session himself and talks with parents directly, building real safety and familiarity for cubs and families alike, not a new face every few months.",
     icon: HandHeart,
   },
 ];
@@ -53,7 +53,7 @@ const STEPS = [
   {
     step: "3",
     title: "Enroll & pay online",
-    body: "See your location's monthly rate and pay securely — that's it, you're on the team.",
+    body: "See your location's monthly rate and pay securely. That's it, you're on the team.",
   },
 ];
 
@@ -78,7 +78,7 @@ export default function Home() {
               style={{ "--d": "0.1s" } as React.CSSProperties}
             >
               Soccer Cubs brings playful, coach-led soccer classes straight to
-              daycares across Northern Virginia &mdash; for wobbly, giggly,
+              daycares across Northern Virginia, for wobbly, giggly,
               soccer-loving cubs ages 2 and up.
             </p>
             <div
@@ -114,7 +114,7 @@ export default function Home() {
             </div>
             <Image
               src="/images/brand/logo-full.png"
-              alt="Soccer Cubs logo — a happy lion cub dribbling a soccer ball"
+              alt="Soccer Cubs logo: a happy lion cub dribbling a soccer ball"
               width={480}
               height={480}
               className="relative w-64 sm:w-80 lg:w-[26rem] h-auto drop-shadow-[0_18px_22px_rgb(51_32_15/0.22)]"
@@ -164,7 +164,7 @@ export default function Home() {
               Made for the littlest players
             </h2>
             <p className="mt-4 text-lg text-brown-soft max-w-lg">
-              We keep it simple, silly, and full of movement &mdash; because
+              We keep it simple, silly, and full of movement, because
               that&apos;s exactly what this age needs.
             </p>
             <ul className="mt-8 divide-y divide-brown/10 border-y border-brown/10">
@@ -208,7 +208,7 @@ export default function Home() {
             </ol>
             <p className="mt-12 flex items-center justify-center gap-2 text-center text-sm font-semibold text-brown-soft">
               <CheckCircle size={18} weight="fill" className="text-green-deep shrink-0" aria-hidden="true" />
-              No long-term commitment — you can edit your info or cancel anytime.
+              No long-term commitment. You can edit your info or cancel anytime.
             </p>
           </div>
         </Container>
