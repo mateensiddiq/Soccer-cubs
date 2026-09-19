@@ -122,7 +122,7 @@ export default function Home() {
               alt="Soccer Cubs logo — a happy lion cub dribbling a soccer ball"
               width={480}
               height={480}
-              className="absolute -bottom-4 -left-2 sm:-left-12 w-36 sm:w-52 h-auto -rotate-6 drop-shadow-[0_14px_18px_rgb(51_32_15/0.28)]"
+              className="absolute -bottom-7 -right-1 sm:-right-5 w-36 sm:w-48 h-auto drop-shadow-[0_12px_16px_rgb(51_32_15/0.25)]"
             />
           </div>
         </Container>

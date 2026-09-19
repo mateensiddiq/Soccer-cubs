@@ -89,13 +89,13 @@ export default function ProgramPage() {
               Classes run for about 30 minutes, right at your daycare, using
               soft training balls and gear sized for little feet.
             </p>
-            <div className="mt-8 overflow-hidden rounded-[2rem] border-4 border-white shadow-lift">
+            <div className="mt-8 max-w-md overflow-hidden rounded-[2rem] border-4 border-white shadow-lift">
               <Image
-                src="/images/photos/class-action-1.jpg"
-                alt="Kids dribbling soccer balls during a Soccer Cubs class"
-                width={2000}
-                height={1125}
-                sizes="(min-width: 1024px) 600px, 92vw"
+                src="/images/photos/class-action-4.jpg"
+                alt="Cubs in Soccer Cubs shirts passing and dribbling soccer balls together during class"
+                width={1400}
+                height={1400}
+                sizes="(min-width: 1024px) 448px, 92vw"
                 className="h-auto w-full"
               />
             </div>
